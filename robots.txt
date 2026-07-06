@@ -1,0 +1,8 @@
+# App Food Việt Nam
+# Không chặn /cam-on/ và /dang-ky/ ở đây: 2 trang này dùng meta noindex,
+# robots.txt chặn crawl sẽ khiến Google không đọc được thẻ noindex.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://appfoodvietnam.com/sitemap.xml

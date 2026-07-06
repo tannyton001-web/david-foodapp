@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+**/.DS_Store
+__MACOSX/
+
+# Dev tool / editor config — không public
+.claude/
+
+# Chỉ thị dự án nội bộ — không public
+CLAUDE.md
+
+# Apps Script backend source + hướng dẫn deploy nội bộ — chứa Sheet ID thật và
+# email cá nhân thật (MAIL_TO/MAIL_REPLY_TO). Endpoint public duy nhất cần cho
+# frontend là Web App URL /exec đã có sẵn trong data-endpoint của form — KHÔNG
+# cần source .gs này để deploy web tĩnh lên Hostinger.
+apps-script/
+
+# Evidence/report audit nội bộ — không phải asset public
+audit-screenshots/
+
+# Build artifact cục bộ (mirror của repo root, tạo lại được bằng script copy) —
+# không commit để tránh 2 nguồn sự thật lệch nhau theo thời gian
+dist/
+
+# Bộ icon SVG cũ từ bản nháp trước Step 3 — không còn HTML nào tham chiếu
+# (toàn site hiện dùng inline SVG); giữ ngoài git để repo public gọn
+assets/icons/
+
+# Ảnh nháp AI (banana-generated) chưa/không được chọn dùng chính thức —
+# không tham chiếu từ HTML nào
+assets/generated-images/
+
+# Ảnh gốc JPG đã thay bằng .webp (Step 6) — không còn HTML nào tham chiếu.
+# og-image.jpg NGOẠI LỆ (vẫn dùng cho og:image/twitter:image) nên không match.
+assets/img/hero-pho.jpg
+assets/img/giao-di.jpg
+assets/img/mon-viet.jpg
+assets/img/chu-quan.jpg
+
+# Node / editor rác (phòng khi phát sinh về sau)
+node_modules/
+*.log
+.vscode/

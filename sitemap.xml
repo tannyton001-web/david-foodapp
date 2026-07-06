@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KHÔNG thêm /cam-on/ và /dang-ky/ vào sitemap — 2 trang này noindex. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://appfoodvietnam.com/</loc>
+    <lastmod>2026-07-06</lastmod>
+  </url>
+  <url>
+    <loc>https://appfoodvietnam.com/dich-vu/</loc>
+    <lastmod>2026-07-06</lastmod>
+  </url>
+  <url>
+    <loc>https://appfoodvietnam.com/bao-gia/</loc>
+    <lastmod>2026-07-06</lastmod>
+  </url>
+  <url>
+    <loc>https://appfoodvietnam.com/gioi-thieu/</loc>
+    <lastmod>2026-07-06</lastmod>
+  </url>
+  <url>
+    <loc>https://appfoodvietnam.com/lien-he/</loc>
+    <lastmod>2026-07-06</lastmod>
+  </url>
+  <url>
+    <loc>https://appfoodvietnam.com/cau-hoi-thuong-gap/</loc>
+    <lastmod>2026-07-06</lastmod>
+  </url>
+  <url>
+    <loc>https://appfoodvietnam.com/chinh-sach/</loc>
+    <lastmod>2026-07-06</lastmod>
+  </url>
+</urlset>
