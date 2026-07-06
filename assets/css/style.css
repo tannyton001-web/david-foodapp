@@ -372,18 +372,31 @@ h3 {
 .btn-lg { min-height: 58px; padding: 16px 34px; font-size: 1.0625rem; }
 
 /* ---------- Header ---------- */
+/* QUAN TRỌNG: .site-header KHÔNG được có transform/filter/backdrop-filter/
+   will-change/perspective/contain trực tiếp trên chính nó — bất kỳ thuộc tính
+   nào trong nhóm này biến nó thành containing block MỚI cho .main-nav (mobile
+   menu, position:fixed), khiến menu chỉ phủ đúng vùng thanh header mỏng thay vì
+   toàn viewport khi đã cuộn. Đây là NGUYÊN NHÂN GỐC của bug "cuộn xuống rồi mở
+   menu thì chữ/nội dung đè xuyên qua" — lớp kính mờ khi cuộn (.is-scrolled)
+   được chuyển sang pseudo-element ::before (không nằm trong chuỗi ancestor
+   containing-block của .main-nav) để giữ đúng hiệu ứng thị giác mà không phá
+   containing block của phần tử fixed bên trong. */
 .site-header {
   position: fixed; inset-inline: 0; top: 0; z-index: 100;
   padding-block: 14px;
-  transition: background-color var(--t-vua) var(--ease), box-shadow var(--t-vua) var(--ease), padding var(--t-vua) var(--ease);
+  transition: padding var(--t-vua) var(--ease);
 }
-.site-header.is-scrolled {
-  padding-block: 10px;
+.site-header::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background: var(--kinh);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow: 0 10px 30px -18px rgba(155, 62, 62, .3);
+  opacity: 0;
+  transition: opacity var(--t-vua) var(--ease);
 }
+.site-header.is-scrolled { padding-block: 10px; }
+.site-header.is-scrolled::before { opacity: 1; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .logo { display: inline-flex; align-items: center; gap: 11px; }
 .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 6px 14px rgba(214, 51, 108, .3)); }
@@ -473,6 +486,13 @@ h3 {
   display: inline-flex; align-items: center; justify-content: center; flex: none;
   width: 21px; height: 21px; border-radius: 50%;
   background: var(--grad-cta); color: #fff; font-size: .75rem; font-weight: 800;
+}
+/* Mobile: 3 dòng riêng thay vì wrap — flex-wrap ở độ rộng hẹp (360-430px) hay
+   tạo dòng lệch (vd. dòng 1 đủ 2 mục rồi để trống lớn trước khi wrap mục 3
+   xuống 1 mình), đọc như khoảng trống thừa dưới mục 2. Xếp cột dọc loại hẳn
+   kiểu wrap không đều này. */
+@media (max-width: 640px) {
+  .mini-steps { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
 
 /* Khối ảnh hero */
@@ -773,8 +793,12 @@ h3 {
 .form-field.has-error input { border-color: var(--loi); background: var(--loi-nen); box-shadow: 0 0 0 3px rgba(192, 58, 33, .13); }
 .form-field.has-error input:focus { border-color: var(--loi); box-shadow: 0 0 0 4px rgba(192, 58, 33, .2); }
 .field-error { display: none; align-items: flex-start; gap: 6px; font-size: .8438rem; color: var(--loi-dam); font-weight: 600; }
-/* Corrected state (JS thêm .is-fixed ~1.5s): xác nhận xanh nhẹ khi field vừa thoát lỗi */
-.form-field.is-fixed input { border-color: #57B584; box-shadow: 0 0 0 3px rgba(30, 107, 71, .12); }
+/* Valid state ỔN ĐỊNH (JS thêm .is-valid, không tự gỡ theo thời gian) — giữ
+   nguyên viền xanh tới khi field bị sửa thành sai lại. Trước đây là hiệu ứng
+   thoáng qua 1.5s rồi tự tắt (.is-fixed) — chính đó là nguyên nhân user thấy
+   "điền đúng xong lại như lỗi": xanh biến mất về viền trung tính dễ bị hiểu
+   nhầm là quay lại lỗi, nhất là khi field bên cạnh vẫn đỏ. */
+.form-field.is-valid input { border-color: #57B584; box-shadow: 0 0 0 3px rgba(30, 107, 71, .12); }
 .form-field.has-error .field-error { display: inline-flex; animation: loi-hien 180ms var(--ease) both; }
 .field-error svg { width: 15px; height: 15px; flex: none; margin-top: 3px; }
 @keyframes loi-hien { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
@@ -1112,6 +1136,18 @@ h3 {
 @keyframes hero-vao {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
+/* Mobile: H1/CTA/lead là chữ QUAN TRỌNG NHẤT trên màn hình đầu — với stagger
+   delay gốc (tới .24s + .8s ≈ 1.04s cho phần tử cuối), người dùng cảm nhận
+   trang "load chậm" dù ảnh/font đã sẵn sàng từ trước, chỉ là animation giữ
+   opacity thấp. Rút ngắn mạnh + bỏ stagger trên mobile để chữ hiện gần như
+   ngay lập tức — vẫn còn hiệu ứng nhẹ (không xóa hẳn), không đổi art direction
+   desktop. */
+@media (max-width: 900px) {
+  .hero-enter, .hero-enter-2, .hero-enter-3, .hero-enter-4 {
+    animation-duration: 280ms;
+    animation-delay: 0ms;
+  }
 }
 
 /* ---------- Reduced motion ---------- */

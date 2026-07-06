@@ -16,18 +16,40 @@
     window.addEventListener("scroll", onScrollHeader, { passive: true });
   }
 
-  /* ----- Menu mobile ----- */
+  /* ----- Menu mobile -----
+     Khóa scroll bằng position:fixed trên body (đáng tin cậy hơn overflow:hidden
+     đơn thuần trên iOS Safari — bản overflow:hidden cũ vẫn để lọt touch-scroll
+     ở một số phiên bản). Ghi lại scrollY trước khi khóa, trả đúng vị trí khi
+     đóng menu để không bị nhảy trang. */
   var navToggle = document.querySelector(".nav-toggle");
   if (navToggle) {
+    var scrollYTruocKhiMoMenu = 0;
+    var dangMoMenu = false;
+    function moMenu() {
+      if (dangMoMenu) return;
+      dangMoMenu = true;
+      scrollYTruocKhiMoMenu = window.scrollY || window.pageYOffset;
+      document.body.style.position = "fixed";
+      document.body.style.top = "-" + scrollYTruocKhiMoMenu + "px";
+      document.body.style.width = "100%";
+      document.body.classList.add("nav-open");
+      navToggle.setAttribute("aria-expanded", "true");
+    }
+    function dongMenu() {
+      if (!dangMoMenu) return;
+      dangMoMenu = false;
+      document.body.classList.remove("nav-open");
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollYTruocKhiMoMenu);
+      navToggle.setAttribute("aria-expanded", "false");
+    }
     navToggle.addEventListener("click", function () {
-      var open = document.body.classList.toggle("nav-open");
-      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      if (dangMoMenu) dongMenu(); else moMenu();
     });
     document.querySelectorAll(".main-nav a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        document.body.classList.remove("nav-open");
-        navToggle.setAttribute("aria-expanded", "false");
-      });
+      a.addEventListener("click", dongMenu);
     });
   }
 
@@ -143,6 +165,13 @@
     return null;
   }
 
+  /* State máy 3 trạng thái cho field (chỉ trình bày — không đổi validate/payload):
+     1. Untouched/chưa submit: neutral (attempted=false, không thêm class nào).
+     2. Invalid: has-error (đỏ đất) + message, is-valid luôn bị gỡ trước.
+     3. Valid: is-valid (xanh) ỔN ĐỊNH — giữ nguyên tới khi field bị sửa thành
+        sai lại, KHÔNG tự mờ/tắt theo thời gian (khác bản cũ dùng setTimeout
+        1.5s — đó chính là nguyên nhân user thấy "điền đúng xong lại như lỗi":
+        xanh tắt về neutral rồi dễ bị hiểu nhầm là quay lại đỏ). */
   function veLoiField(name, msg) {
     if (name === "apps") {
       if (appAlert) appAlert.classList.toggle("is-visible", !!msg);
@@ -150,21 +179,15 @@
     }
     var input = inputs[name];
     var wrap = input.closest(".form-field");
-    var hadError = wrap.classList.contains("has-error");
     wrap.classList.toggle("has-error", !!msg);
     if (msg) {
-      wrap.classList.remove("is-fixed");
+      wrap.classList.remove("is-valid");
       input.setAttribute("aria-invalid", "true");
       var errText = wrap.querySelector(".field-error span");
       if (errText) errText.textContent = msg;
     } else {
       input.removeAttribute("aria-invalid");
-      /* Chỉ trình bày: field vừa thoát lỗi → nháy xác nhận xanh nhẹ rồi tự tắt.
-         Không đổi logic validate/payload/submit. */
-      if (hadError) {
-        wrap.classList.add("is-fixed");
-        setTimeout(function () { wrap.classList.remove("is-fixed"); }, 1500);
-      }
+      wrap.classList.toggle("is-valid", attempted);
     }
   }
 
@@ -207,12 +230,39 @@
     }
   }
 
-  /* "Reward early": sau lần bấm gửi đầu, field đang lỗi được re-validate ngay khi sửa */
-  Object.keys(inputs).forEach(function (name) {
-    inputs[name].addEventListener("input", function () {
-      if (attempted) veLoiField(name, loiCuaField(name));
-      capNhatSummaryTheoLoiConLai();
+  /* "Reward early": sau lần bấm gửi đầu, field đang lỗi/valid được re-validate
+     qua NHIỀU loại sự kiện — bắt đủ mọi cách giá trị có thể đổi: gõ tay, xóa,
+     dán, and phím tắt, tab qua field khác, và autofill/gợi ý bàn phím (iPhone
+     gợi ý số điện thoại đã lưu, "AutoFill" trên Safari...). Trước đây chỉ nghe
+     "input" nên có trường hợp autofill không bắn đúng sự kiện chuẩn khiến lỗi
+     không tự xóa dù giá trị đã hợp lệ. */
+  var CAC_SU_KIEN_KIEM_LAI = ["input", "change", "blur", "keyup", "compositionend"];
+  function kiemTraLaiField(name) {
+    if (attempted) veLoiField(name, loiCuaField(name));
+    capNhatSummaryTheoLoiConLai();
+  }
+  /* Autofill/gợi ý bàn phím đôi khi không bắn sự kiện chuẩn ngay lập tức (đặc
+     biệt Safari iOS) — xếp lịch kiểm lại vài lần ngắn sau khi field có tương
+     tác, không phụ thuộc hoàn toàn vào 1 sự kiện duy nhất.
+     SIMULATED_AUTOFILL_PASS_NEEDS_REAL_IPHONE_CONFIRMATION: đã mô phỏng bằng
+     JS (set value + dispatch event tổng hợp) và test local, nhưng hành vi
+     autofill thật của Safari/iOS chỉ xác nhận chắc chắn được trên thiết bị
+     thật. */
+  function kiemTraTreField(name) {
+    [50, 150, 300].forEach(function (ms) {
+      setTimeout(function () { kiemTraLaiField(name); }, ms);
     });
+  }
+  Object.keys(inputs).forEach(function (name) {
+    CAC_SU_KIEN_KIEM_LAI.forEach(function (evt) {
+      inputs[name].addEventListener(evt, function () { kiemTraLaiField(name); });
+    });
+    /* paste: trình duyệt chèn nội dung dán XONG mới cập nhật value — đợi 1 tick */
+    inputs[name].addEventListener("paste", function () {
+      setTimeout(function () { kiemTraLaiField(name); }, 0);
+    });
+    inputs[name].addEventListener("focus", function () { kiemTraTreField(name); });
+    inputs[name].addEventListener("input", function () { kiemTraTreField(name); });
   });
   appBoxes.forEach(function (box) {
     box.addEventListener("change", function () {
@@ -339,7 +389,8 @@
       eventCallback: chuyenTrang,
       eventTimeout: 2000
     });
-    /* GTM chưa gắn (NEED_DATA_LATER): không có google_tag_manager thì chuyển trang ngay */
+    /* GTM lỗi tải/bị chặn (ad-blocker...): không có google_tag_manager thì chuyển trang ngay,
+       không chặn luồng người dùng chờ event callback không bao giờ tới. */
     if (!window.google_tag_manager) chuyenTrang();
   }
 })();
