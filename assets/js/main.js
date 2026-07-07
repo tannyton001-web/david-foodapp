@@ -32,6 +32,11 @@
       document.body.style.position = "fixed";
       document.body.style.top = "-" + scrollYTruocKhiMoMenu + "px";
       document.body.style.width = "100%";
+      /* Ép reflow trước khi thêm class mở menu — tránh trường hợp trình duyệt
+         mobile (đặc biệt Safari/iOS) bắt đầu transition opacity của .main-nav
+         dựa trên layout cũ (trước khi scroll-lock của body được commit), có
+         thể khiến overlay composite sai vị trí ngay sau khi vừa cuộn. */
+      void document.body.offsetHeight;
       document.body.classList.add("nav-open");
       navToggle.setAttribute("aria-expanded", "true");
     }
@@ -103,7 +108,7 @@
   }
 
   /* ================= FORM ĐĂNG KÝ TƯ VẤN =================
-     Contract: apps-script/DEPLOY.md mục 7 + handoff final build.
+     Payload phải khớp đúng hợp đồng dữ liệu với backend:
      - Payload apps dùng LABEL đúng whitelist endpoint ("Xanh SM", không phải "Xanh SM Ngon").
      - dataLayer + /cam-on/ dùng KEY (grabfood, shopeefood, befood, xanhsm).
      - Success duy nhất: ok === true && lead_saved === true && conversion_eligible === true. */
@@ -243,11 +248,7 @@
   }
   /* Autofill/gợi ý bàn phím đôi khi không bắn sự kiện chuẩn ngay lập tức (đặc
      biệt Safari iOS) — xếp lịch kiểm lại vài lần ngắn sau khi field có tương
-     tác, không phụ thuộc hoàn toàn vào 1 sự kiện duy nhất.
-     SIMULATED_AUTOFILL_PASS_NEEDS_REAL_IPHONE_CONFIRMATION: đã mô phỏng bằng
-     JS (set value + dispatch event tổng hợp) và test local, nhưng hành vi
-     autofill thật của Safari/iOS chỉ xác nhận chắc chắn được trên thiết bị
-     thật. */
+     tác, không phụ thuộc hoàn toàn vào 1 sự kiện duy nhất. */
   function kiemTraTreField(name) {
     [50, 150, 300].forEach(function (ms) {
       setTimeout(function () { kiemTraLaiField(name); }, ms);
