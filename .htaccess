@@ -1,23 +1,35 @@
 ErrorDocument 404 /404.html
 
-# PATCH 02D: chặn mọi dotfile (.gitignore, .env, .DS_Store, .htpasswd...) khỏi
-# web root — .gitignore từng bị serve HTTP 200 vì bị git-track nên tự deploy
-# theo repo. Match theo TÊN FILE (không theo path), nên KHÔNG ảnh hưởng thư
-# mục .well-known/ (vd /.well-known/security.txt có tên file "security.txt",
-# không bắt đầu bằng dấu chấm) nếu sau này cần dùng.
+# Chặn mọi dotfile (.env, .gitignore, .htaccess, .DS_Store...) khỏi web root.
+# Match theo TÊN FILE (không theo path) nên KHÔNG ảnh hưởng thư mục
+# .well-known/ (vd /.well-known/security.txt có tên file "security.txt",
+# không bắt đầu bằng dấu chấm).
 <FilesMatch "^\.">
   Require all denied
 </FilesMatch>
 
-# PATCH 02E: HTML luôn revalidate với server (no-cache ≠ no-store: vẫn cache
-# nhưng phải hỏi lại trước khi dùng). Root cause lỗi menu iPhone "vá mãi không
-# hết": host mặc định cache css/js 7 ngày, không cache-busting → sau mỗi deploy
-# CDN edge/browser trộn HTML mới + JS/CSS cũ (đã bắt quả tang live: main.js
-# last-modified cũ hơn HTML 2 giờ, x-hcdn-cache-status: HIT) — tổ hợp lệch
-# version này tạo bug chỉ thấy trên máy thật, local mirror không tái tạo được.
-# Fix trọn bộ: asset tham chiếu qua ?v=02e (đổi mỗi lần sửa css/js) + HTML
-# no-cache để version flip đồng bộ ngay khi deploy. Giữ nguyên max-age dài cho
-# css/js (tốt cho PageSpeed) vì đã có version query lo việc cập nhật.
+# Thư mục làm việc không thuộc deploy chuẩn — trả 404 (không tiết lộ path có
+# tồn tại hay không) phòng trường hợp file bị upload nhầm lên web root.
+RedirectMatch 404 ^/(\.claude|apps-script|audit-screenshots|dist)(/|$)
+
+# Chặn file tài liệu cục bộ đích danh (không dùng wildcard *.md — README.md
+# vẫn public).
+<FilesMatch "^(CLAUDE|HANDOFF.*)\.md$">
+  Require all denied
+</FilesMatch>
+
+# Site tĩnh không serve archive/log/backup/dump — chặn theo extension và tên.
+<FilesMatch "\.(zip|tar|gz|tgz|rar|7z|log|bak|sql)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^(error_log|debug\.log)$">
+  Require all denied
+</FilesMatch>
+
+# HTML luôn revalidate với server (no-cache ≠ no-store: vẫn cache nhưng phải
+# hỏi lại trước khi dùng) để HTML mới và asset version query (?v=) flip đồng
+# bộ ngay sau deploy; css/js giữ max-age dài mặc định của host vì đã có
+# version query lo việc cập nhật.
 <IfModule mod_headers.c>
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
