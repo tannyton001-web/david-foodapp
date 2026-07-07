@@ -1,1 +1,10 @@
 ErrorDocument 404 /404.html
+
+# PATCH 02D: chặn mọi dotfile (.gitignore, .env, .DS_Store, .htpasswd...) khỏi
+# web root — .gitignore từng bị serve HTTP 200 vì bị git-track nên tự deploy
+# theo repo. Match theo TÊN FILE (không theo path), nên KHÔNG ảnh hưởng thư
+# mục .well-known/ (vd /.well-known/security.txt có tên file "security.txt",
+# không bắt đầu bằng dấu chấm) nếu sau này cần dùng.
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>

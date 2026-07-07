@@ -420,31 +420,43 @@ h3 {
   align-items: center; justify-content: center;
 }
 .nav-toggle svg { width: 22px; height: 22px; }
-.nav-toggle .icon-close, .nav-open .nav-toggle .icon-menu { display: none; }
-.nav-open .nav-toggle .icon-close { display: block; }
+.nav-toggle .icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-menu { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-close { display: block; }
 
 @media (max-width: 900px) {
   .nav-toggle { display: inline-flex; }
   .header-cta { display: none; }
-  .main-nav {
-    /* z-index=95: khi mở, JS portal .main-nav ra thành con trực tiếp của
-       <body> (xem main.js) nên giờ nằm ở stacking context gốc, không còn
-       "ăn theo" thứ tự cũ trong header. Phải > .floating-cta (90) để phủ kín
-       nút nổi, nhưng PHẢI < .site-header (100) — header (chứa nút đóng dạng
-       X, .nav-toggle) cần đứng trên menu để còn bấm đóng được, vì .nav-toggle
-       vẫn ở trong .site-header, không portal theo .main-nav.
-       Nền đổi sang --nen (opaque, không backdrop-filter) để không bao giờ lộ
-       nội dung phía sau dù trình duyệt composite lớp có trục trặc. */
-    position: fixed; inset: 0; z-index: 95;
-    -webkit-transform: translateZ(0); transform: translateZ(0);
-    flex-direction: column; justify-content: center; gap: 8px;
+  .main-nav { display: none; }
+
+  /* Overlay menu mobile (PATCH 02D) — phần tử TĨNH nằm sẵn cuối <body> ngay
+     từ lúc parse HTML, không phải node bị JS reparent lúc runtime (xem lý do
+     trong main.js). Không lồng trong stacking context của .site-header nên
+     không cần translateZ/backdrop-filter hack; z-index gần kịch trần +
+     isolation:isolate đảm bảo luôn ở trên cùng bất kể z-index của phần tử
+     khác trên trang là bao nhiêu. Nền luôn opaque 100% — không glass/blur. */
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 2147483000;
+    isolation: isolate;
+    width: 100vw; height: 100vh; height: 100dvh;
     background: var(--nen);
-    opacity: 0; visibility: hidden;
-    transition: opacity var(--t-vua) var(--ease), visibility var(--t-vua) var(--ease);
+    overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
   }
-  .main-nav a { font-size: 1.375rem; font-weight: 600; padding: 14px 26px; }
-  .nav-open .main-nav { opacity: 1; visibility: visible; }
-  .nav-open { overflow: hidden; }
+  .mobile-menu-overlay:not([hidden]) {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  }
+  .mobile-menu-nav { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .mobile-menu-nav a { font-size: 1.375rem; font-weight: 600; padding: 14px 26px; color: var(--muc-2); border-radius: 999px; }
+  .mobile-menu-nav a[aria-current="page"] { color: var(--man-dam); font-weight: 700; }
+  .mobile-menu-close {
+    position: absolute; top: 18px; right: 18px;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px;
+    border: 1.5px solid var(--vien-2); border-radius: 14px;
+    background: rgba(255, 255, 255, .85); color: var(--muc);
+  }
+  .mobile-menu-close svg { width: 22px; height: 22px; }
 }
 
 /* ---------- Hero ---------- */

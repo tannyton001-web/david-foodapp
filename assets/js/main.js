@@ -16,24 +16,26 @@
     window.addEventListener("scroll", onScrollHeader, { passive: true });
   }
 
-  /* ----- Menu mobile -----
-     Khóa scroll bằng position:fixed trên body (đáng tin cậy hơn overflow:hidden
-     đơn thuần trên iOS Safari — bản overflow:hidden cũ vẫn để lọt touch-scroll
-     ở một số phiên bản). Ghi lại scrollY trước khi khóa, trả đúng vị trí khi
-     đóng menu để không bị nhảy trang. */
+  /* ----- Menu mobile (PATCH 02D) -----
+     Overlay #mobileMenu là phần tử TĨNH, có sẵn trong DOM ngay từ đầu (cuối
+     <body>) — không còn appendChild/reparent .main-nav lúc runtime như bản
+     portal trước. Bản portal (PATCH 02C) vẫn bị user chụp ảnh chứng minh fail
+     thật trên iPhone (link đè lên content sau khi scroll) dù desktop Chromium
+     test pass — vì vậy không vá tiếp z-index/layer tại chỗ mà bỏ hẳn kiến trúc
+     "di chuyển node giữa lúc có thể đang có gesture cuộn". Overlay này là con
+     trực tiếp của <body> ngay từ lúc parse HTML nên không lồng trong stacking
+     context của .site-header, không cần translateZ/backdrop-filter hack, và
+     dùng z-index gần kịch trần + isolation:isolate để luôn ở trên cùng bất kể
+     .site-header/.floating-cta z-index là bao nhiêu (xem style.css).
+     Khóa scroll vẫn dùng position:fixed trên body (đáng tin cậy hơn
+     overflow:hidden thuần trên iOS Safari). Đóng menu KHÔNG dùng
+     window.scrollTo(0, y) (kế thừa scroll-behavior:smooth toàn cục gây auto-
+     scroll nhìn thấy được 750ms-1.35s) — dùng behavior:"instant" để restore
+     scroll ngay lập tức, không animation. */
   var navToggle = document.querySelector(".nav-toggle");
-  var mainNav = document.querySelector(".main-nav");
-  if (navToggle && mainNav) {
-    /* Portal khi mở: chuyển .main-nav thành con trực tiếp của <body>, thoát
-       hẳn khỏi stacking context của .site-header (position:fixed + z-index:100).
-       CSS đúng theo spec (site-header không transform/filter nên không tạo
-       containing block cho .main-nav) vẫn không đủ trên thực tế — WebKit/iOS
-       Safari có bug đã biết: position:fixed lồng trong 1 position:fixed khác
-       có thể composite sai lớp ngay sau khi cuộn, không tái hiện được trên
-       headless Chrome. Portal ra ngoài body loại bỏ hẳn việc lồng fixed-trong-
-       fixed thay vì tiếp tục vá z-index/layer tại chỗ. */
-    var navParent = mainNav.parentNode;
-    var navNextSibling = mainNav.nextSibling;
+  var mobileMenu = document.getElementById("mobileMenu");
+  if (navToggle && mobileMenu) {
+    var mobileMenuClose = mobileMenu.querySelector(".mobile-menu-close");
     var scrollYTruocKhiMoMenu = 0;
     var dangMoMenu = false;
     function moMenu() {
@@ -43,30 +45,26 @@
       document.body.style.position = "fixed";
       document.body.style.top = "-" + scrollYTruocKhiMoMenu + "px";
       document.body.style.width = "100%";
-      document.body.appendChild(mainNav);
-      /* Ép reflow trước khi thêm class mở menu — tránh trường hợp trình duyệt
-         mobile (đặc biệt Safari/iOS) bắt đầu transition opacity của .main-nav
-         dựa trên layout cũ (trước khi scroll-lock của body được commit), có
-         thể khiến overlay composite sai vị trí ngay sau khi vừa cuộn. */
-      void document.body.offsetHeight;
-      document.body.classList.add("nav-open");
+      document.body.style.overflow = "hidden";
+      mobileMenu.hidden = false;
       navToggle.setAttribute("aria-expanded", "true");
     }
     function dongMenu() {
       if (!dangMoMenu) return;
       dangMoMenu = false;
-      document.body.classList.remove("nav-open");
+      mobileMenu.hidden = true;
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
-      navParent.insertBefore(mainNav, navNextSibling);
-      window.scrollTo(0, scrollYTruocKhiMoMenu);
+      document.body.style.overflow = "";
+      window.scrollTo({ top: scrollYTruocKhiMoMenu, left: 0, behavior: "instant" });
       navToggle.setAttribute("aria-expanded", "false");
     }
     navToggle.addEventListener("click", function () {
       if (dangMoMenu) dongMenu(); else moMenu();
     });
-    document.querySelectorAll(".main-nav a").forEach(function (a) {
+    if (mobileMenuClose) mobileMenuClose.addEventListener("click", dongMenu);
+    mobileMenu.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", dongMenu);
     });
   }
