@@ -16,12 +16,12 @@
     window.addEventListener("scroll", onScrollHeader, { passive: true });
   }
 
-  /* ----- Menu mobile (PATCH 02E) -----
-     Overlay #mobileMenu tĩnh, opaque, phủ toàn viewport (như 02D) — nhưng
-     KHÔNG khóa body bằng position:fixed nữa. Lý do: ép body fixed làm document
+  /* ----- Menu mobile -----
+     Overlay #mobileMenu tĩnh, opaque, phủ toàn viewport — KHÔNG khóa body
+     bằng position:fixed. Lý do: ép body fixed làm document
      sập chiều cao về đúng viewport → thanh URL Safari/Chrome iOS bung ra/thu
-     lại + scrollTo restore lúc đóng → chính là cảm giác "kéo lên/kéo xuống
-     như mở trang/tắt trang" user tả trên iPhone thật. Overlay đã opaque che
+     lại + scrollTo restore lúc đóng → tạo cảm giác giật "kéo lên/kéo xuống
+     như mở trang/tắt trang" trên iPhone. Overlay đã opaque che
      kín nền nên không cần đóng băng body; chặn cuộn lồng xuống body bằng
      overscroll-behavior:contain + nội dung overlay luôn cao hơn overlay 1px
      (xem style.css) để overlay luôn là scroll container thật sự. Chỉ khi nền

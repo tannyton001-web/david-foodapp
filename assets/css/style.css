@@ -434,9 +434,9 @@ h3 {
   .header-cta { display: none; }
   .main-nav { display: none; }
 
-  /* Overlay menu mobile (PATCH 02E) — phần tử TĨNH nằm sẵn cuối <body>, opaque
-     100%, z-index gần kịch trần + isolation:isolate (như 02D). Khác 02D:
-     KHÔNG khóa body nữa (xem main.js) — thay vào đó overlay tự là scroll
+  /* Overlay menu mobile — phần tử TĨNH nằm sẵn cuối <body>, opaque
+     100%, z-index gần kịch trần + isolation:isolate.
+     KHÔNG khóa body (xem main.js) — thay vào đó overlay tự là scroll
      container: inset:0 bám đúng layout viewport iOS (không dùng 100vh — 100vh
      trên iOS là viewport LỚN khi thanh URL đã thu, tràn cao hơn màn hình thật),
      và .mobile-menu-nav luôn cao hơn overlay đúng 1px để overlay LUÔN cuộn
