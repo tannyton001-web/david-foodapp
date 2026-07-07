@@ -424,33 +424,48 @@ h3 {
 .nav-toggle[aria-expanded="true"] .icon-menu { display: none; }
 .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
 
+/* Base NGOÀI media query: desktop không bao giờ render overlay dù JS/state có
+   ra sao (vd xoay iPad portrait→landscape khi menu đang mở — media query thoát
+   giữa chừng). JS cũng tự đóng menu khi rời breakpoint (xem main.js). */
+.mobile-menu-overlay { display: none; }
+
 @media (max-width: 900px) {
   .nav-toggle { display: inline-flex; }
   .header-cta { display: none; }
   .main-nav { display: none; }
 
-  /* Overlay menu mobile (PATCH 02D) — phần tử TĨNH nằm sẵn cuối <body> ngay
-     từ lúc parse HTML, không phải node bị JS reparent lúc runtime (xem lý do
-     trong main.js). Không lồng trong stacking context của .site-header nên
-     không cần translateZ/backdrop-filter hack; z-index gần kịch trần +
-     isolation:isolate đảm bảo luôn ở trên cùng bất kể z-index của phần tử
-     khác trên trang là bao nhiêu. Nền luôn opaque 100% — không glass/blur. */
+  /* Overlay menu mobile (PATCH 02E) — phần tử TĨNH nằm sẵn cuối <body>, opaque
+     100%, z-index gần kịch trần + isolation:isolate (như 02D). Khác 02D:
+     KHÔNG khóa body nữa (xem main.js) — thay vào đó overlay tự là scroll
+     container: inset:0 bám đúng layout viewport iOS (không dùng 100vh — 100vh
+     trên iOS là viewport LỚN khi thanh URL đã thu, tràn cao hơn màn hình thật),
+     và .mobile-menu-nav luôn cao hơn overlay đúng 1px để overlay LUÔN cuộn
+     được → overscroll-behavior:contain luôn có hiệu lực, cuộn không lồng
+     xuống body. Bỏ -webkit-overflow-scrolling:touch (obsolete từ iOS 13,
+     từng gây bug compositing đúng kiểu "nội dung xuyên lớp").
+     INVARIANT: KHÔNG BAO GIỜ thêm transform/filter/backdrop-filter/
+     will-change/animation lên .mobile-menu-overlay — bất kỳ thuộc tính nào
+     trong nhóm này biến overlay thành containing block mới cho
+     .mobile-menu-close (position:fixed), làm nút đóng cuộn theo nội dung
+     thay vì neo cố định góc phải viewport. */
   .mobile-menu-overlay {
     display: none;
     position: fixed; inset: 0; z-index: 2147483000;
     isolation: isolate;
-    width: 100vw; height: 100vh; height: 100dvh;
     background: var(--nen);
-    overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+    overflow-y: auto; overscroll-behavior: contain;
   }
-  .mobile-menu-overlay:not([hidden]) {
+  .mobile-menu-overlay:not([hidden]) { display: block; }
+  .mobile-menu-nav {
+    min-height: calc(100% + 1px);
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    /* padding-top ≥ vùng nút đóng fixed: link đầu không bao giờ chui dưới nút */
+    padding: 84px 24px 48px;
   }
-  .mobile-menu-nav { display: flex; flex-direction: column; align-items: center; gap: 8px; }
   .mobile-menu-nav a { font-size: 1.375rem; font-weight: 600; padding: 14px 26px; color: var(--muc-2); border-radius: 999px; }
   .mobile-menu-nav a[aria-current="page"] { color: var(--man-dam); font-weight: 700; }
   .mobile-menu-close {
-    position: absolute; top: 18px; right: 18px;
+    position: fixed; top: 18px; right: 18px; z-index: 1;
     display: inline-flex; align-items: center; justify-content: center;
     width: 46px; height: 46px;
     border: 1.5px solid var(--vien-2); border-radius: 14px;

@@ -16,49 +16,59 @@
     window.addEventListener("scroll", onScrollHeader, { passive: true });
   }
 
-  /* ----- Menu mobile (PATCH 02D) -----
-     Overlay #mobileMenu là phần tử TĨNH, có sẵn trong DOM ngay từ đầu (cuối
-     <body>) — không còn appendChild/reparent .main-nav lúc runtime như bản
-     portal trước. Bản portal (PATCH 02C) vẫn bị user chụp ảnh chứng minh fail
-     thật trên iPhone (link đè lên content sau khi scroll) dù desktop Chromium
-     test pass — vì vậy không vá tiếp z-index/layer tại chỗ mà bỏ hẳn kiến trúc
-     "di chuyển node giữa lúc có thể đang có gesture cuộn". Overlay này là con
-     trực tiếp của <body> ngay từ lúc parse HTML nên không lồng trong stacking
-     context của .site-header, không cần translateZ/backdrop-filter hack, và
-     dùng z-index gần kịch trần + isolation:isolate để luôn ở trên cùng bất kể
-     .site-header/.floating-cta z-index là bao nhiêu (xem style.css).
-     Khóa scroll vẫn dùng position:fixed trên body (đáng tin cậy hơn
-     overflow:hidden thuần trên iOS Safari). Đóng menu KHÔNG dùng
-     window.scrollTo(0, y) (kế thừa scroll-behavior:smooth toàn cục gây auto-
-     scroll nhìn thấy được 750ms-1.35s) — dùng behavior:"instant" để restore
-     scroll ngay lập tức, không animation. */
+  /* ----- Menu mobile (PATCH 02E) -----
+     Overlay #mobileMenu tĩnh, opaque, phủ toàn viewport (như 02D) — nhưng
+     KHÔNG khóa body bằng position:fixed nữa. Lý do: ép body fixed làm document
+     sập chiều cao về đúng viewport → thanh URL Safari/Chrome iOS bung ra/thu
+     lại + scrollTo restore lúc đóng → chính là cảm giác "kéo lên/kéo xuống
+     như mở trang/tắt trang" user tả trên iPhone thật. Overlay đã opaque che
+     kín nền nên không cần đóng băng body; chặn cuộn lồng xuống body bằng
+     overscroll-behavior:contain + nội dung overlay luôn cao hơn overlay 1px
+     (xem style.css) để overlay luôn là scroll container thật sự. Chỉ khi nền
+     vẫn bị trôi (iOS cũ chưa hỗ trợ overscroll-behavior, hoặc momentum đang
+     chạy dở lúc mở) mới kéo lại đúng vị trí cũ khi đóng — trường hợp thường
+     gặp thì không có bất kỳ lệnh scroll nào chạy, không có gì để "giật". */
   var navToggle = document.querySelector(".nav-toggle");
   var mobileMenu = document.getElementById("mobileMenu");
   if (navToggle && mobileMenu) {
     var mobileMenuClose = mobileMenu.querySelector(".mobile-menu-close");
     var scrollYTruocKhiMoMenu = 0;
     var dangMoMenu = false;
+    var coInert = "inert" in HTMLElement.prototype;
+    /* Mọi khối nội dung sau lưng overlay (header/main/footer/nút nổi) — chặn
+       focus/VoiceOver lọt ra sau menu đang mở. */
+    function khoiSauOverlay() {
+      return Array.prototype.filter.call(document.body.children, function (el) {
+        return el !== mobileMenu && el.tagName !== "SCRIPT";
+      });
+    }
     function moMenu() {
       if (dangMoMenu) return;
       dangMoMenu = true;
       scrollYTruocKhiMoMenu = window.scrollY || window.pageYOffset;
-      document.body.style.position = "fixed";
-      document.body.style.top = "-" + scrollYTruocKhiMoMenu + "px";
-      document.body.style.width = "100%";
-      document.body.style.overflow = "hidden";
       mobileMenu.hidden = false;
+      mobileMenu.scrollTop = 0;
+      if (coInert) khoiSauOverlay().forEach(function (el) { el.inert = true; });
       navToggle.setAttribute("aria-expanded", "true");
+      if (mobileMenuClose) mobileMenuClose.focus({ preventScroll: true });
     }
     function dongMenu() {
       if (!dangMoMenu) return;
       dangMoMenu = false;
       mobileMenu.hidden = true;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      window.scrollTo({ top: scrollYTruocKhiMoMenu, left: 0, behavior: "instant" });
+      if (coInert) khoiSauOverlay().forEach(function (el) { el.inert = false; });
       navToggle.setAttribute("aria-expanded", "false");
+      if ((window.scrollY || window.pageYOffset) !== scrollYTruocKhiMoMenu) {
+        /* Nhánh này CHỈ chạy trên engine cũ (không có overscroll-behavior) —
+           đúng nhóm có thể thiếu luôn ScrollToOptions/behavior:"instant".
+           Dùng scrollTo(x, y) cổ điển (chạy mọi đời máy) + tắt tạm
+           scroll-behavior:smooth toàn cục để restore tức thì, không animation. */
+        var docEl = document.documentElement;
+        docEl.style.scrollBehavior = "auto";
+        window.scrollTo(0, scrollYTruocKhiMoMenu);
+        docEl.style.scrollBehavior = "";
+      }
+      navToggle.focus({ preventScroll: true });
     }
     navToggle.addEventListener("click", function () {
       if (dangMoMenu) dongMenu(); else moMenu();
@@ -67,6 +77,17 @@
     mobileMenu.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", dongMenu);
     });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") dongMenu();
+    });
+    /* Rời breakpoint mobile khi menu đang mở (xoay iPad portrait→landscape):
+       đóng sạch — gỡ inert, trả hidden — tránh kẹt overlay/nền chết click.
+       addListener: fallback cho iPadOS ≤13 (chưa có addEventListener trên
+       MediaQueryList) — đúng nhóm máy hay xoay ngang nhất. */
+    var mqMobile = window.matchMedia("(max-width: 900px)");
+    var dongKhiRoiBreakpoint = function (e) { if (!e.matches) dongMenu(); };
+    if (mqMobile.addEventListener) mqMobile.addEventListener("change", dongKhiRoiBreakpoint);
+    else if (mqMobile.addListener) mqMobile.addListener(dongKhiRoiBreakpoint);
   }
 
   /* ----- Scroll reveal ----- */

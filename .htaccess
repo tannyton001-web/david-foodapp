@@ -8,3 +8,18 @@ ErrorDocument 404 /404.html
 <FilesMatch "^\.">
   Require all denied
 </FilesMatch>
+
+# PATCH 02E: HTML luôn revalidate với server (no-cache ≠ no-store: vẫn cache
+# nhưng phải hỏi lại trước khi dùng). Root cause lỗi menu iPhone "vá mãi không
+# hết": host mặc định cache css/js 7 ngày, không cache-busting → sau mỗi deploy
+# CDN edge/browser trộn HTML mới + JS/CSS cũ (đã bắt quả tang live: main.js
+# last-modified cũ hơn HTML 2 giờ, x-hcdn-cache-status: HIT) — tổ hợp lệch
+# version này tạo bug chỉ thấy trên máy thật, local mirror không tái tạo được.
+# Fix trọn bộ: asset tham chiếu qua ?v=02e (đổi mỗi lần sửa css/js) + HTML
+# no-cache để version flip đồng bộ ngay khi deploy. Giữ nguyên max-age dài cho
+# css/js (tốt cho PageSpeed) vì đã có version query lo việc cập nhật.
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

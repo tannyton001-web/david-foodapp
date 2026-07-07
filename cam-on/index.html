@@ -28,7 +28,7 @@
   <link rel="canonical" href="https://appfoodvietnam.com/cam-on/">
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/bricolage-grotesque-800-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css?v=02e">
   <!-- Trang này KHÔNG chứa code conversion (Google Ads/GTM) và không push lead_form_submit_success.
        Refresh/back/truy cập trực tiếp không được phép fire lại conversion — event chỉ push 1 lần
        ở trang form, trước khi redirect sang đây. -->
@@ -104,7 +104,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<div class="mobile-menu-overlay" id="mobileMenu" hidden>
+<div class="mobile-menu-overlay" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu điều hướng" hidden>
   <button class="mobile-menu-close" aria-label="Đóng menu">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
   </button>
@@ -118,7 +118,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </div>
 
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js?v=02e"></script>
 <script>
   /* Hiện lại các app đã chọn từ query ?apps=grabfood,shopeefood — chỉ nhận đúng 4 key hợp lệ */
   (function () {
