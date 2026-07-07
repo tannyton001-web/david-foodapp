@@ -22,7 +22,18 @@
      ở một số phiên bản). Ghi lại scrollY trước khi khóa, trả đúng vị trí khi
      đóng menu để không bị nhảy trang. */
   var navToggle = document.querySelector(".nav-toggle");
-  if (navToggle) {
+  var mainNav = document.querySelector(".main-nav");
+  if (navToggle && mainNav) {
+    /* Portal khi mở: chuyển .main-nav thành con trực tiếp của <body>, thoát
+       hẳn khỏi stacking context của .site-header (position:fixed + z-index:100).
+       CSS đúng theo spec (site-header không transform/filter nên không tạo
+       containing block cho .main-nav) vẫn không đủ trên thực tế — WebKit/iOS
+       Safari có bug đã biết: position:fixed lồng trong 1 position:fixed khác
+       có thể composite sai lớp ngay sau khi cuộn, không tái hiện được trên
+       headless Chrome. Portal ra ngoài body loại bỏ hẳn việc lồng fixed-trong-
+       fixed thay vì tiếp tục vá z-index/layer tại chỗ. */
+    var navParent = mainNav.parentNode;
+    var navNextSibling = mainNav.nextSibling;
     var scrollYTruocKhiMoMenu = 0;
     var dangMoMenu = false;
     function moMenu() {
@@ -32,6 +43,7 @@
       document.body.style.position = "fixed";
       document.body.style.top = "-" + scrollYTruocKhiMoMenu + "px";
       document.body.style.width = "100%";
+      document.body.appendChild(mainNav);
       /* Ép reflow trước khi thêm class mở menu — tránh trường hợp trình duyệt
          mobile (đặc biệt Safari/iOS) bắt đầu transition opacity của .main-nav
          dựa trên layout cũ (trước khi scroll-lock của body được commit), có
@@ -47,6 +59,7 @@
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
+      navParent.insertBefore(mainNav, navNextSibling);
       window.scrollTo(0, scrollYTruocKhiMoMenu);
       navToggle.setAttribute("aria-expanded", "false");
     }

@@ -376,23 +376,13 @@ h3 {
    will-change/perspective/contain trực tiếp trên chính nó — bất kỳ thuộc tính
    nào trong nhóm này biến nó thành containing block MỚI cho .main-nav (mobile
    menu, position:fixed), khiến menu chỉ phủ đúng vùng thanh header mỏng thay vì
-   toàn viewport khi đã cuộn. Đây là 1 nguyên nhân đã xử lý — lớp kính mờ khi
-   cuộn (.is-scrolled) được chuyển sang pseudo-element ::before (không nằm
-   trong chuỗi ancestor containing-block của .main-nav) để giữ đúng hiệu ứng
-   thị giác mà không phá containing block của phần tử fixed bên trong.
+   toàn viewport khi đã cuộn. Lớp kính mờ khi cuộn (.is-scrolled) vì vậy nằm ở
+   pseudo-element ::before thay vì trực tiếp trên .site-header.
 
-   Thêm 1 lớp bảo vệ nữa cho đúng bug "cuộn rồi mở menu thì nội dung đè xuyên
-   qua": .main-nav trước đây có z-index:-1 (âm) — về lý thuyết CSS spec, vì
-   .main-nav là con của .site-header (chính nó đã là 1 stacking context nhờ
-   position:fixed + z-index:100), z-index âm của .main-nav CHỈ ảnh hưởng thứ
-   tự vẽ so với các anh em khác BÊN TRONG .site-header (vd. .nav-toggle),
-   không ảnh hưởng so với nội dung NGOÀI header — nhưng đây vẫn là giá trị
-   sai/dễ vỡ (từng khiến nav-toggle icon-close có thể bị menu che), và
-   composite layer thật trên WebKit/iOS (đặc biệt kết hợp backdrop-filter +
-   position:fixed sau khi cuộn) không phải lúc nào cũng tuân thủ đúng lý
-   thuyết stacking-context như trình duyệt desktop/headless Chrome dùng để
-   test. Sửa z-index về dương + ép GPU layer riêng (transform: translateZ(0)) để
-   .main-nav luôn được composite ổn định, không phụ thuộc thời điểm cuộn. */
+   .main-nav khi mở được JS portal ra thành con trực tiếp của <body> (xem
+   main.js) để không còn lồng trong stacking context position:fixed của
+   .site-header — xem chi tiết lý do trong khối @media (max-width: 900px)
+   bên dưới. */
 .site-header {
   position: fixed; inset-inline: 0; top: 0; z-index: 100;
   padding-block: 14px;
@@ -437,12 +427,18 @@ h3 {
   .nav-toggle { display: inline-flex; }
   .header-cta { display: none; }
   .main-nav {
-    position: fixed; inset: 0; z-index: 1;
+    /* z-index=95: khi mở, JS portal .main-nav ra thành con trực tiếp của
+       <body> (xem main.js) nên giờ nằm ở stacking context gốc, không còn
+       "ăn theo" thứ tự cũ trong header. Phải > .floating-cta (90) để phủ kín
+       nút nổi, nhưng PHẢI < .site-header (100) — header (chứa nút đóng dạng
+       X, .nav-toggle) cần đứng trên menu để còn bấm đóng được, vì .nav-toggle
+       vẫn ở trong .site-header, không portal theo .main-nav.
+       Nền đổi sang --nen (opaque, không backdrop-filter) để không bao giờ lộ
+       nội dung phía sau dù trình duyệt composite lớp có trục trặc. */
+    position: fixed; inset: 0; z-index: 95;
     -webkit-transform: translateZ(0); transform: translateZ(0);
     flex-direction: column; justify-content: center; gap: 8px;
-    background: var(--kinh);
-    -webkit-backdrop-filter: blur(24px);
-    backdrop-filter: blur(24px);
+    background: var(--nen);
     opacity: 0; visibility: hidden;
     transition: opacity var(--t-vua) var(--ease), visibility var(--t-vua) var(--ease);
   }
