@@ -34,4 +34,10 @@ RedirectMatch 404 ^/(\.claude|apps-script|audit-screenshots|dist)(/|$)
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
+  # Font self-host không bao giờ sửa nội dung tại cùng tên file → cache 1 năm.
+  # (Ảnh/css/js giữ mặc định host: ảnh không có version query nên không
+  # cache dài để tránh lỗi trộn bản cũ khi thay ảnh cùng tên.)
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
 </IfModule>
