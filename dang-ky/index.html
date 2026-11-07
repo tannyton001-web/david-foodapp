@@ -11,16 +11,16 @@
   <!-- End Google Tag Manager -->
   <meta name="google-site-verification" content="fqpDVTH3SYLtBj9AutIHvdOHtQyylVKKp6pQyJX3B4w">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Đăng ký tư vấn mở gian hàng trên app giao đồ ăn | App Food Việt Nam</title>
-  <meta name="description" content="Để lại tên quán, số điện thoại và app bạn quan tâm (GrabFood, ShopeeFood, BeFood, Xanh SM). Chúng tôi gọi lại tư vấn và báo rõ chi phí trước khi bạn quyết định.">
+  <title>Hỗ trợ đăng ký bán hàng trên app | App Food Việt Nam</title>
+  <meta name="description" content="Chọn app giao đồ ăn và gửi thông tin quán. App Food Việt Nam gọi lại để hướng dẫn đăng ký và trao đổi chi phí.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://appfoodvietnam.com/dang-ky/">
-  <meta property="og:title" content="Đăng ký tư vấn mở gian hàng trên app giao đồ ăn">
-  <meta property="og:description" content="Để lại tên quán, số điện thoại và app bạn quan tâm (GrabFood, ShopeeFood, BeFood, Xanh SM). Chúng tôi gọi lại tư vấn và báo rõ chi phí trước khi bạn quyết định.">
+  <meta property="og:title" content="Hỗ trợ đăng ký bán hàng trên app">
+  <meta property="og:description" content="Chọn app giao đồ ăn và gửi thông tin quán. App Food Việt Nam gọi lại để hướng dẫn đăng ký và trao đổi chi phí.">
   <meta property="og:image" content="https://appfoodvietnam.com/assets/img/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Đăng ký tư vấn mở gian hàng trên app giao đồ ăn">
-  <meta name="twitter:description" content="Để lại tên quán, số điện thoại và app bạn quan tâm (GrabFood, ShopeeFood, BeFood, Xanh SM). Chúng tôi gọi lại tư vấn và báo rõ chi phí trước khi bạn quyết định.">
+  <meta name="twitter:title" content="Hỗ trợ đăng ký bán hàng trên app">
+  <meta name="twitter:description" content="Chọn app giao đồ ăn và gửi thông tin quán. App Food Việt Nam gọi lại để hướng dẫn đăng ký và trao đổi chi phí.">
   <meta name="twitter:image" content="https://appfoodvietnam.com/assets/img/og-image.jpg">
   <meta name="robots" content="noindex, follow">
   <meta name="theme-color" content="#FFFBF5">
@@ -29,8 +29,35 @@
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/bricolage-grotesque-800-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/style.css?v=02f">
+  <style>
+    /* Registration page only: preserve shared styles and image/icon sizing. */
+    .registration-page .page-hero { padding-bottom: 28px; }
+    .registration-page #label-apps .field-hint {
+      display: block; margin-top: 4px; font-weight: 400;
+    }
+    @media (max-width: 640px) {
+      .registration-page .page-hero { text-align: left; }
+      .registration-page .page-hero .container { justify-items: start; }
+      .registration-page .page-hero h1 {
+        font-size: clamp(2rem, 7.5vw + .5rem, 2.375rem);
+      }
+      .registration-page .page-hero .lead {
+        max-width: 36ch; line-height: 1.6;
+      }
+      .registration-page .lead-form,
+      .registration-page .form-aside { padding: 28px 24px; }
+      .registration-page .app-choices {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+      }
+      .registration-page .app-choice .chip-face {
+        font-size: .875rem; line-height: 1.4;
+      }
+      .registration-page .form-submit .btn { padding-inline: 16px; }
+      .registration-page .form-disclosure { text-align: left; }
+    }
+  </style>
 </head>
-<body>
+<body class="registration-page">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2JDBFPT"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -65,7 +92,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="blob blob-2"></span>
     </div>
     <div class="container">
-      <span class="eyebrow hero-enter">Đăng ký tư vấn</span>
+      <span class="eyebrow hero-enter">Dành cho chủ quán</span>
       <h1 class="hero-enter-2">Hỗ trợ <span class="grad-text">đăng ký bán hàng trên app</span></h1>
       <p class="lead hero-enter-3">Chọn app và để lại thông tin quán. Chúng tôi gọi lại để hướng dẫn đăng ký và trao đổi chi phí.</p>
       <span class="hero-badge hero-enter-3">
@@ -89,7 +116,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M8.4 12.4l2.4 2.4 4.8-5"/></svg>
-                Kiểm tra hồ sơ cần chuẩn bị.
+                Hướng dẫn chuẩn bị hồ sơ.
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M8.4 12.4l2.4 2.4 4.8-5"/></svg>
