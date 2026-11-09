@@ -761,6 +761,7 @@ h3 {
 .form-aside li { display: flex; gap: 11px; align-items: flex-start; font-size: .9375rem; color: rgba(255, 255, 255, .92); }
 .form-aside li svg { width: 20px; height: 20px; flex: none; color: #FFD9A0; margin-top: 2px; }
 .form-aside .form-hotline { margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.25); font-size: .9375rem; }
+.form-aside .form-hours { display: block; margin-top: 4px; font-size: .875rem; color: rgba(255, 255, 255, .8); }
 .form-aside .form-hotline a { color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: .01em; }
 .lead-form { padding: clamp(28px, 4vw, 52px); display: grid; gap: 20px; align-content: start; }
 .form-intro-mobile { display: none; }

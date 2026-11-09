@@ -386,7 +386,7 @@
           /* Soft success: không dataLayer, không conversion, không redirect, không xóa form */
           setDangGui(false);
           btnText.textContent = btnTextGoc;
-          hienStatus("info", "Số điện thoại này đã gửi thông tin trước đó. Chúng tôi sẽ gọi lại theo số này, bạn không cần gửi thêm.");
+          hienStatus("info", "Số điện thoại này đã gửi thông tin trước đó. Tôi sẽ gọi lại theo số này, bạn không cần gửi thêm.");
         } else {
           guiLoi();
         }

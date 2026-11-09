@@ -33,7 +33,7 @@
   <link rel="canonical" href="https://appfoodvietnam.com/huong-dan-dang-ky/">
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/bricolage-grotesque-700-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=03a">
+  <link rel="stylesheet" href="/assets/css/style.css?v=03b">
   <style>
     /* Page-scoped — chỉ dùng cho /huong-dan-dang-ky/, không đụng assets/css/style.css */
     /* Checklist 5 nhóm: 3+2 (hàng 2 căn giữa có chủ đích) thay vì 4+1 */
@@ -47,6 +47,10 @@
     .guide-note { max-width: 760px; margin-top: 28px; color: var(--muc-2); }
     /* Trang đọc dài: mọi khối cùng trục trái với tiêu đề section */
     .guide-timeline, .prose { margin-inline: 0; }
+    .guide-split { align-items: center; margin-bottom: clamp(32px, 4vw, 48px); }
+    .guide-split .section-head { margin-bottom: 0; }
+    #loi-thuong-gap .guide-split { margin-bottom: 0; }
+    #loi-thuong-gap .prose { margin-top: 24px; }
     .guide-box {
       margin-top: clamp(28px, 4vw, 44px); padding: clamp(22px, 3vw, 34px);
       background: var(--the); border: 1.5px solid var(--vien); border-radius: var(--bo-goc-lon);
@@ -59,8 +63,6 @@
     .guide-box ul { list-style: none; padding: 0; display: grid; gap: 8px; }
     .guide-box li { display: flex; gap: 9px; align-items: flex-start; font-size: .9375rem; color: var(--muc-2); line-height: 1.5; }
     .guide-box li svg { width: 17px; height: 17px; flex: none; color: var(--man); margin-top: 3px; }
-    .guide-box .src { font-size: .8125rem; color: var(--muc-3); }
-    .guide-box .src a { text-decoration: underline; text-underline-offset: 2px; }
     .channel-list li strong { color: var(--muc); }
     @media (max-width: 900px) { .type-grid { grid-template-columns: 1fr; } }
     .guide-timeline { position: relative; max-width: 640px; margin-inline: auto; display: grid; gap: 26px; }
@@ -155,7 +157,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="eyebrow hero-enter">Hướng dẫn</span>
       <h1 class="hero-enter-2">Hướng dẫn đăng&nbsp;ký app giao&nbsp;đồ&nbsp;ăn <span class="grad-text">cho chủ&nbsp;quán</span></h1>
       <p class="lead hero-enter-3">Để mở gian hàng trên app giao đồ ăn, bạn cần chuẩn bị hồ sơ, menu và thông tin nhận tiền. Xem danh sách bên dưới rồi kiểm tra yêu cầu trên kênh chính thức của app đã chọn.</p>
-      <p class="lead hero-enter-3">App Food Việt Nam là dịch vụ tư vấn độc lập, hướng dẫn chủ quán chuẩn bị hồ sơ đăng ký gian hàng. Chúng tôi không phải kênh chính thức của các app và không cam kết kết quả xét duyệt.</p>
+      <p class="lead hero-enter-3">App Food Việt Nam là dịch vụ tư vấn độc lập, hướng dẫn chủ quán chuẩn bị hồ sơ đăng ký gian hàng. Tôi không phải kênh chính thức của các app và không cam kết kết quả xét duyệt.</p>
       <div class="hero-actions hero-enter-3">
         <a class="btn btn-primary btn-lg" href="/dang-ky/">
           Nhận tư vấn chuẩn bị hồ sơ
@@ -167,16 +169,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <nav class="container guide-toc" aria-label="Nội dung hướng dẫn">
-    <p>Xem nhanh: <a href="#chuan-bi">Chuẩn bị hồ sơ</a> · <a href="#quy-trinh">Quy trình</a> · <a href="#phi-tu-van">Chi phí</a> · <a href="#loi-thuong-gap">Lỗi thường gặp</a> · <a href="#kenh-chinh-thuc">Kênh chính thức</a></p>
+    <p>Xem nhanh: <a href="#chuan-bi">Chuẩn bị hồ sơ</a> · <a href="#quy-trinh">Quy trình</a> · <a href="#phi-tu-van">Chi phí</a> · <a href="#loi-thuong-gap">Lỗi thường gặp</a> · <a href="#kenh-chinh-thuc">Gửi ở đâu</a></p>
   </nav>
 
   <!-- ============ SECTION 1: CHUẨN BỊ GÌ ============ -->
   <section class="section" id="chuan-bi" style="padding-top: 8px;">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="split guide-split">
+        <div class="section-head reveal">
         <span class="eyebrow">Trước khi đăng ký</span>
         <h2>Chủ&nbsp;quán cần chuẩn bị gì trước khi đăng&nbsp;ký?</h2>
         <p class="lead">Trước khi gửi hồ sơ, bạn nên gom thông tin theo 5 nhóm dưới đây. Chuẩn bị theo nhóm giúp dễ kiểm tra, không sót giấy tờ và bổ sung nhanh nếu app yêu cầu.</p>
+      </div>
+        <div class="split-media reveal reveal-d1"><img src="/assets/img/ho-so-theo-nhom.webp" srcset="/assets/img/ho-so-theo-nhom-800.webp 800w, /assets/img/ho-so-theo-nhom.webp 1400w" sizes="(max-width: 900px) 92vw, 540px" alt="Bìa hồ sơ, giấy tờ, thẻ và điện thoại được xếp gọn theo nhóm trên bàn gỗ" width="1400" height="939" loading="lazy"></div>
       </div>
       <div class="checklist-grid">
         <article class="value-item reveal">
@@ -217,14 +222,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <p class="guide-note">Mỗi nền tảng có thể yêu cầu khác nhau theo thời điểm và khu vực. Vì vậy, chủ quán nên chuẩn bị thông tin theo nhóm trước, sau đó kiểm tra lại yêu cầu cụ thể khi gửi đăng ký qua kênh chính thức.</p>
       <div class="guide-box reveal">
-        <h3>Ví dụ: hồ&nbsp;sơ chia theo loại&nbsp;hình kinh&nbsp;doanh</h3>
-        <p>Trang đăng ký đối tác nhà hàng của Xanh SM liệt kê giấy tờ theo 3 loại hình. App khác có thể yêu cầu khác, nên bạn vẫn cần kiểm tra lại trên kênh chính thức của app mình chọn.</p>
+        <h3>Giấy&nbsp;tờ thường khác nhau theo cách bạn đứng tên</h3>
+        <p>Cùng một quán, đứng tên cá nhân, hộ kinh doanh hay công ty sẽ cần bộ giấy tờ khác nhau. Bảng dưới là các mục hay gặp để bạn hình dung trước; danh sách chính xác còn tùy app và thời điểm đăng ký.</p>
         <div class="type-grid">
-          <div><h4>Hộ&nbsp;kinh&nbsp;doanh</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD hoặc hộ chiếu (ảnh chụp bản gốc)</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy đăng ký hộ kinh doanh</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền rõ bảng hiệu và địa chỉ</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Thực đơn và ảnh món</li></ul></div>
-          <div><h4>Cá nhân</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD hoặc hộ chiếu (ảnh chụp bản gốc)</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Mã số thuế</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền rõ bảng hiệu và địa chỉ</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Thực đơn và ảnh món</li></ul></div>
-          <div><h4>Công ty</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy đăng ký kinh doanh</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy ủy quyền nếu người khác ký thay</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy chứng nhận an toàn thực phẩm</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD hoặc hộ chiếu người đại diện</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền, thực đơn và ảnh món</li></ul></div>
+          <div><h4>Cá nhân</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD hoặc hộ chiếu còn hiệu lực</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Mã số thuế cá nhân</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền thấy rõ biển hiệu, địa chỉ</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Menu kèm giá và ảnh món</li></ul></div>
+          <div><h4>Hộ&nbsp;kinh&nbsp;doanh</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD của chủ hộ</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy chứng nhận đăng ký hộ kinh doanh</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền thấy rõ biển hiệu, địa chỉ</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Menu kèm giá và ảnh món</li></ul></div>
+          <div><h4>Công ty</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy chứng nhận đăng ký doanh nghiệp</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD người đại diện, giấy ủy quyền nếu người khác ký</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy tờ về an toàn thực phẩm nếu app yêu cầu</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền, menu kèm giá và ảnh món</li></ul></div>
         </div>
-        <p class="src">Nguồn: <a href="https://www.greensm.com/vn-vi/greensm-merchant" target="_blank" rel="noopener">greensm.com/vn-vi/greensm-merchant</a> · đối chiếu ngày 09/11/2026.</p>
       </div>
     </div>
   </section>
@@ -276,14 +280,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <p class="guide-note">Thời gian phản hồi và kết quả xét duyệt do từng nền tảng quyết định. Dịch vụ tư vấn chỉ hỗ trợ bạn chuẩn bị thông tin rõ ràng hơn trước khi gửi.</p>
       <div class="guide-box reveal" id="kenh-chinh-thuc">
-        <h3>Gửi đăng&nbsp;ký ở đâu?</h3>
-        <p>Hồ sơ luôn gửi trên kênh dành cho đối tác quán ăn của chính app đó. Không gửi giấy tờ cho bên nào tự nhận là “kênh duyệt nhanh”.</p>
+        <h3>Gửi hồ&nbsp;sơ ở đâu cho an toàn?</h3>
         <ul class="channel-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg><span><strong>GrabFood:</strong> trang đối tác nhà hàng <a href="https://www.grab.com/vn/merchant/food/" target="_blank" rel="noopener">grab.com/vn/merchant/food</a></span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg><span><strong>Xanh SM:</strong> trang đối tác nhà hàng <a href="https://www.greensm.com/vn-vi/greensm-merchant" target="_blank" rel="noopener">greensm.com/vn-vi/greensm-merchant</a> hoặc ứng dụng Green SM Merchant</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg><span><strong>ShopeeFood, BeFood:</strong> mục đăng ký đối tác quán ăn trên kênh chính thức của từng app. Khi tư vấn, chúng tôi gửi bạn đường dẫn đang dùng.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg><span><strong>Chỉ gửi trên kênh chính thức của app:</strong> mục đăng ký đối tác quán ăn trong ứng dụng hoặc trang dành cho đối tác của chính app đó.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg><span><strong>Không gửi giấy tờ cho bên tự nhận "duyệt nhanh"</strong> hay "bao đậu" — không ai quyết định thay nền tảng được.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg><span><strong>Không đưa mật khẩu, mã OTP</strong> tài khoản app cho bất kỳ ai, kể cả người tư vấn.</span></li>
         </ul>
-        <p class="src">Đối chiếu đường dẫn lần cuối: 09/11/2026.</p>
+        <p>Khi tư vấn, tôi chỉ bạn đúng mục đăng ký của app đã chọn và bạn tự gửi hồ sơ đứng tên mình.</p>
       </div>
     </div>
   </section>
@@ -320,6 +323,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ============ SECTION 4: LỖI THƯỜNG GẶP ============ -->
   <section class="section section-alt" id="loi-thuong-gap">
     <div class="container">
+      <div class="split guide-split reverse">
+        <div class="split-media reveal"><img src="/assets/img/chup-anh-mon.webp" srcset="/assets/img/chup-anh-mon-800.webp 800w, /assets/img/chup-anh-mon.webp 1400w" sizes="(max-width: 900px) 92vw, 540px" alt="Chụp ảnh tô bún bằng điện thoại cạnh cửa sổ, ánh sáng tự nhiên" width="1400" height="939" loading="lazy"></div>
+        <div>
       <div class="section-head reveal">
         <span class="eyebrow">Chuẩn bị kỹ hơn</span>
         <h2>Những lỗi thường làm hồ&nbsp;sơ phải bổ sung</h2>
@@ -334,6 +340,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Tài khoản nhận tiền chưa chuẩn bị sẵn.</li>
         </ul>
         <p>Các lỗi trên chỉ là nhóm tình huống thường gặp khi chuẩn bị thông tin. Quyết định yêu cầu bổ sung hoặc từ chối hồ sơ vẫn thuộc về từng nền tảng.</p>
+      </div>
+        </div>
       </div>
     </div>
   </section>
@@ -363,7 +371,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="cta-banner reveal">
         <h2>Cần hỗ trợ chuẩn bị hồ&nbsp;sơ cho quán?</h2>
-        <p>Để lại thông tin, chúng tôi gọi lại tư vấn — bạn quyết định sau khi đã rõ.</p>
+        <p>Để lại thông tin, tôi gọi lại tư vấn — bạn quyết định sau khi đã rõ.</p>
         <a class="btn btn-primary btn-lg" href="/dang-ky/">
           Đăng ký tư vấn
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15.4"/><path d="M13.6 6.2l5.8 5.8-5.8 5.8"/></svg>
@@ -433,16 +441,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </li>
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M12 7.6V12l3 2.2"/></svg>
-          <span>Ngoài giờ, nhắn Zalo — chúng tôi liên hệ lại trong giờ làm việc kế tiếp</span>
+          <span>Thứ 2 – Thứ 6, 8:00–18:00 (giờ Việt Nam). Ngoài giờ, cứ nhắn Zalo, tôi trả lời vào giờ làm việc kế tiếp.</span>
         </li>
       </ul>
     </div>
   </div>
   <div class="container footer-disclosure">
-    Dịch vụ tư vấn độc lập, không phải kênh chính thức, đối tác, đại lý, đại diện hay bên được ủy quyền của các nền tảng giao đồ ăn. Việc xét duyệt do từng nền tảng thực hiện; chúng tôi không cam kết duyệt, đơn hàng hoặc doanh thu.
+    Dịch vụ tư vấn độc lập, không phải kênh chính thức, đối tác, đại lý, đại diện hay bên được ủy quyền của các nền tảng giao đồ ăn. Việc xét duyệt do từng nền tảng thực hiện; tôi không cam kết duyệt, đơn hàng hoặc doanh thu.
   </div>
   <div class="container footer-bottom">
-    <span>© 2026 App Food Việt Nam</span>
+    <span>© 2026 App Food Việt Nam · Cá nhân tư vấn độc lập</span>
     <span class="brands">GrabFood, ShopeeFood, BeFood, Xanh SM là nhãn hiệu thuộc về các chủ sở hữu tương ứng.</span>
   </div>
 </footer>
@@ -464,6 +472,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </div>
 
-<script src="/assets/js/main.js?v=03a" defer></script>
+<script src="/assets/js/main.js?v=03b" defer></script>
 </body>
 </html>
