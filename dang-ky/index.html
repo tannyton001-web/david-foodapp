@@ -11,7 +11,7 @@
   <!-- End Google Tag Manager -->
   <meta name="google-site-verification" content="fqpDVTH3SYLtBj9AutIHvdOHtQyylVKKp6pQyJX3B4w">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__afvReady)document.documentElement.classList.remove('js')},3000)</script>
   <title>Hỗ trợ đăng ký bán hàng trên app | App Food Việt Nam</title>
   <meta name="description" content="Chọn app giao đồ ăn và gửi thông tin quán. App Food Việt Nam gọi lại để hướng dẫn đăng ký và trao đổi chi phí.">
   <meta property="og:type" content="website">
@@ -33,8 +33,10 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="canonical" href="https://appfoodvietnam.com/dang-ky/">
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/bricolage-grotesque-700-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=03b">
+  <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/be-vietnam-pro-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/be-vietnam-pro-700-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/style.css?v=04b">
   <style>
     /* Registration page only: preserve shared styles and image/icon sizing. */
     .registration-page .page-hero { padding-bottom: 28px; }
@@ -173,13 +175,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="form-field">
               <label for="ten-quan">Tên quán</label>
-              <input type="text" id="ten-quan" name="ten_quan" placeholder="Ví dụ: Bún Chả Cô Ba" autocomplete="organization" aria-describedby="err-ten-quan">
+              <input type="text" id="ten-quan" required aria-required="true" name="ten_quan" placeholder="Ví dụ: Bún Chả Cô Ba" autocomplete="organization" aria-describedby="err-ten-quan">
               <span class="field-error" id="err-ten-quan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M12 8v4.8"/><path d="M12 16.2h.01"/></svg><span>Nhập tên quán.</span></span>
             </div>
 
             <div class="form-field">
               <label for="so-dien-thoai">Số điện thoại</label>
-              <input type="tel" id="so-dien-thoai" name="so_dien_thoai" inputmode="numeric" maxlength="10" pattern="0[0-9]{9}" placeholder="Ví dụ: 0912345678" autocomplete="tel" aria-describedby="hint-sdt err-sdt">
+              <input type="tel" id="so-dien-thoai" required aria-required="true" name="so_dien_thoai" inputmode="numeric" maxlength="10" pattern="0[0-9]{9}" placeholder="Ví dụ: 0912345678" autocomplete="tel" aria-describedby="hint-sdt err-sdt">
               <span class="field-hint" id="hint-sdt">Số di động 10 số, viết liền, bắt đầu bằng 0.</span>
               <span class="field-error" id="err-sdt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M12 8v4.8"/><path d="M12 16.2h.01"/></svg><span>Nhập số điện thoại.</span></span>
             </div>
@@ -187,12 +189,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="form-row">
               <div class="form-field">
                 <label for="ten-chu-quan">Tên chủ quán</label>
-                <input type="text" id="ten-chu-quan" name="ten_chu_quan" placeholder="Ví dụ: anh Minh, chị Hoa" autocomplete="name" aria-describedby="err-ten-chu">
+                <input type="text" id="ten-chu-quan" required aria-required="true" name="ten_chu_quan" placeholder="Ví dụ: anh Minh, chị Hoa" autocomplete="name" aria-describedby="err-ten-chu">
                 <span class="field-error" id="err-ten-chu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M12 8v4.8"/><path d="M12 16.2h.01"/></svg><span>Nhập tên chủ quán.</span></span>
               </div>
               <div class="form-field">
                 <label for="dia-chi">Địa chỉ quán</label>
-                <input type="text" id="dia-chi" name="dia_chi_quan" placeholder="Số nhà, đường, phường" autocomplete="street-address" aria-describedby="err-dia-chi">
+                <input type="text" id="dia-chi" required aria-required="true" name="dia_chi_quan" placeholder="Số nhà, đường, phường" autocomplete="street-address" aria-describedby="err-dia-chi">
                 <span class="field-error" id="err-dia-chi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M12 8v4.8"/><path d="M12 16.2h.01"/></svg><span>Nhập địa chỉ quán.</span></span>
               </div>
             </div>
@@ -202,6 +204,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <input type="text" id="hp-website" name="website" value="" tabindex="-1" autocomplete="off">
             </div>
 
+            <noscript><p class="form-noscript">Biểu mẫu cần JavaScript. Bạn có thể gọi <a href="tel:0936254103">0936&nbsp;254&nbsp;103</a> hoặc <a href="https://zalo.me/0936254103">nhắn Zalo</a> để đăng ký.</p></noscript>
             <div class="form-submit">
               <button class="btn btn-primary btn-lg" type="submit">
                 <span class="spinner" aria-hidden="true"></span>
@@ -283,7 +286,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </nav>
     <div class="footer-col">
-      <h3>Liên hệ</h3>
+      <h3>Liên&nbsp;hệ</h3>
       <ul>
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.4 16.8v2.2a1.9 1.9 0 0 1-2.1 1.9 18.9 18.9 0 0 1-8.2-2.9 18.6 18.6 0 0 1-5.7-5.7A18.9 18.9 0 0 1 2.5 4a1.9 1.9 0 0 1 1.9-2.1h2.2a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.7.6 2.5a1.9 1.9 0 0 1-.4 2l-1 1a15.2 15.2 0 0 0 5.7 5.7l1-1a1.9 1.9 0 0 1 2-.4c.8.3 1.6.5 2.5.6a1.9 1.9 0 0 1 1.6 1.9z"/></svg>
@@ -330,6 +333,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </div>
 
-<script src="/assets/js/main.js?v=03b" defer></script>
+<script src="/assets/js/main.js?v=04b" defer></script>
 </body>
 </html>

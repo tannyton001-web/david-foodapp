@@ -4,6 +4,7 @@
 (function () {
   "use strict";
 
+  window.__afvReady = true; /* head có hẹn giờ gỡ class js nếu file này không chạy */
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ----- Header: đổi nền khi cuộn ----- */
@@ -106,6 +107,36 @@
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
   }
 
+  /* ----- Tab gọn trên mobile cho nhóm thẻ [data-tabs] -----
+     Không có JS: hiện đủ các nhóm như cũ. Có JS: thêm hàng nút, mobile chỉ
+     hiện một nhóm (CSS), desktop vẫn hiện đủ 3 cột. */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-tabs]"), function (box) {
+    var panes = box.children;
+    if (panes.length < 2) return;
+    var bar = document.createElement("div");
+    bar.className = "tab-bar";
+    bar.setAttribute("role", "tablist");
+    function chon(i) {
+      Array.prototype.forEach.call(panes, function (p, j) {
+        p.classList.toggle("is-active", i === j);
+        bar.children[j].setAttribute("aria-selected", i === j ? "true" : "false");
+      });
+    }
+    Array.prototype.forEach.call(panes, function (p, i) {
+      var b = document.createElement("button");
+      var h = p.querySelector("h4");
+      b.type = "button";
+      b.className = "tab-btn";
+      b.setAttribute("role", "tab");
+      b.textContent = h ? h.textContent : String(i + 1);
+      b.addEventListener("click", function () { chon(i); });
+      bar.appendChild(b);
+    });
+    box.parentNode.insertBefore(bar, box);
+    box.classList.add("has-tabs");
+    chon(0);
+  });
+
   /* ----- Nút nổi Call/Zalo ----- */
   var floating = document.querySelector(".floating-cta");
   var form = document.querySelector("[data-lead-form]");
@@ -134,7 +165,7 @@
         new IntersectionObserver(function (entries) {
           fabMute.footer = entries[0].isIntersecting;
           updateFabMute();
-        }, { threshold: 0.12 }).observe(footer);
+        }, { threshold: 0, rootMargin: "0px 0px 24px 0px" }).observe(footer);
       }
     }
   }
@@ -193,7 +224,7 @@
     var v = inputs[name].value.trim();
     if (name === "so_dien_thoai") {
       if (!v) return "Nhập số điện thoại.";
-      if (!phoneHopLe(v)) return "Số điện thoại gồm 10 số, bắt đầu bằng 0.";
+      if (!phoneHopLe(v)) return "Nhập số di động 10 chữ số, bắt đầu bằng 0.";
       return null;
     }
     if (!v) {
@@ -262,8 +293,8 @@
       anStatus();
     } else if (statusBox.classList.contains("is-visible") && statusBox.classList.contains("is-error")) {
       statusText.textContent = bad.length === 1
-        ? "Chưa gửi được — kiểm tra lại " + TEN_MUC[bad[0]] + "."
-        : "Chưa gửi được — cần bổ sung " + bad.length + " mục được đánh dấu.";
+        ? "Chưa gửi được. Bạn kiểm tra lại " + TEN_MUC[bad[0]] + "."
+        : "Chưa gửi được. Bạn kiểm tra lại " + bad.length + " mục được đánh dấu.";
     }
   }
 
@@ -339,8 +370,8 @@
     if (bad.length) {
       /* Tầng 2 — summary dưới nút gửi. Không fetch, không dataLayer, không redirect. */
       hienStatus("error", bad.length === 1
-        ? "Chưa gửi được — kiểm tra lại " + TEN_MUC[bad[0]] + "."
-        : "Chưa gửi được — cần bổ sung " + bad.length + " mục được đánh dấu.");
+        ? "Chưa gửi được. Bạn kiểm tra lại " + TEN_MUC[bad[0]] + "."
+        : "Chưa gửi được. Bạn kiểm tra lại " + bad.length + " mục được đánh dấu.");
       focusFieldDau(bad[0]);
       return;
     }
@@ -386,7 +417,7 @@
           /* Soft success: không dataLayer, không conversion, không redirect, không xóa form */
           setDangGui(false);
           btnText.textContent = btnTextGoc;
-          hienStatus("info", "Số điện thoại này đã gửi thông tin trước đó. Tôi sẽ gọi lại theo số này, bạn không cần gửi thêm.");
+          hienStatus("info", "Số điện thoại này đã gửi thông tin trước đó, bạn không cần gửi lại. Muốn bổ sung thông tin, bạn gọi hoặc nhắn Zalo cho tôi.");
         } else {
           guiLoi();
         }

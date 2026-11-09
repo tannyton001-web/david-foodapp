@@ -11,7 +11,7 @@
   <!-- End Google Tag Manager -->
   <meta name="google-site-verification" content="fqpDVTH3SYLtBj9AutIHvdOHtQyylVKKp6pQyJX3B4w">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__afvReady)document.documentElement.classList.remove('js')},3000)</script>
   <title>Hướng dẫn đăng ký app giao đồ ăn cho chủ quán | App Food Việt Nam</title>
   <meta name="description" content="Hướng dẫn chủ quán chuẩn bị hồ sơ, menu, ảnh quán và thông tin cần có khi đăng ký gian hàng trên app giao đồ ăn. Tư vấn độc lập, không cam kết duyệt.">
   <meta name="theme-color" content="#FFFBF5">
@@ -32,8 +32,10 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="canonical" href="https://appfoodvietnam.com/huong-dan-dang-ky/">
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/bricolage-grotesque-700-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=03b">
+  <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/be-vietnam-pro-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/be-vietnam-pro-700-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/style.css?v=04b">
   <style>
     /* Page-scoped — chỉ dùng cho /huong-dan-dang-ky/, không đụng assets/css/style.css */
     /* Checklist 5 nhóm: 3+2 (hàng 2 căn giữa có chủ đích) thay vì 4+1 */
@@ -46,7 +48,7 @@
     .guide-toc a { display: inline-block; padding: 6px 0; font-weight: 600; }
     .guide-note { max-width: 760px; margin-top: 28px; color: var(--muc-2); }
     /* Trang đọc dài: mọi khối cùng trục trái với tiêu đề section */
-    .guide-timeline, .prose { margin-inline: 0; }
+    .prose { margin-inline: 0; }
     .guide-split { align-items: center; margin-bottom: clamp(32px, 4vw, 48px); }
     .guide-split .section-head { margin-bottom: 0; }
     #loi-thuong-gap .guide-split { margin-bottom: 0; }
@@ -65,7 +67,7 @@
     .guide-box li svg { width: 17px; height: 17px; flex: none; color: var(--man); margin-top: 3px; }
     .channel-list li strong { color: var(--muc); }
     @media (max-width: 900px) { .type-grid { grid-template-columns: 1fr; } }
-    .guide-timeline { position: relative; max-width: 640px; margin-inline: auto; display: grid; gap: 26px; }
+    .guide-timeline { position: relative; max-width: 680px; margin-inline: 0; display: grid; gap: 26px; }
     .guide-timeline-item { position: relative; display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
     .guide-timeline-item:not(:last-child)::before {
       content: ""; position: absolute; left: 21px; top: 44px; bottom: -26px; width: 2px;
@@ -95,7 +97,7 @@
     "description": "Hướng dẫn chủ quán chuẩn bị hồ sơ, menu, ảnh quán và thông tin cần có khi đăng ký gian hàng trên app giao đồ ăn.",
     "inLanguage": "vi-VN",
     "dateModified": "2026-11-09",
-    "publisher": { "@type": "Organization", "name": "App Food Việt Nam", "url": "https://appfoodvietnam.com/" }
+    "publisher": { "@type": "ProfessionalService", "@id": "https://appfoodvietnam.com/#org", "name": "App Food Việt Nam", "url": "https://appfoodvietnam.com/" }
   }
   </script>
   <script type="application/ld+json">
@@ -156,8 +158,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <span class="eyebrow hero-enter">Hướng dẫn</span>
       <h1 class="hero-enter-2">Hướng dẫn đăng&nbsp;ký app giao&nbsp;đồ&nbsp;ăn <span class="grad-text">cho chủ&nbsp;quán</span></h1>
-      <p class="lead hero-enter-3">Để mở gian hàng trên app giao đồ ăn, bạn cần chuẩn bị hồ sơ, menu và thông tin nhận tiền. Xem danh sách bên dưới rồi kiểm tra yêu cầu trên kênh chính thức của app đã chọn.</p>
-      <p class="lead hero-enter-3">App Food Việt Nam là dịch vụ tư vấn độc lập, hướng dẫn chủ quán chuẩn bị hồ sơ đăng ký gian hàng. Tôi không phải kênh chính thức của các app và không cam kết kết quả xét duyệt.</p>
+      <p class="lead hero-enter-3">Chuẩn bị hồ sơ, menu và thông tin nhận tiền để đăng ký gian hàng trên app giao đồ ăn. Kiểm tra yêu cầu của app bạn chọn trước khi gửi.</p>
+      <p class="lead hero-enter-3">Tôi là người tư vấn độc lập, không phải kênh chính thức của các app và không cam kết kết quả xét duyệt.</p>
       <div class="hero-actions hero-enter-3">
         <a class="btn btn-primary btn-lg" href="/dang-ky/">
           Nhận tư vấn chuẩn bị hồ sơ
@@ -178,10 +180,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="split guide-split">
         <div class="section-head reveal">
         <span class="eyebrow">Trước khi đăng ký</span>
-        <h2>Chủ&nbsp;quán cần chuẩn bị gì trước khi đăng&nbsp;ký?</h2>
-        <p class="lead">Trước khi gửi hồ sơ, bạn nên gom thông tin theo 5 nhóm dưới đây. Chuẩn bị theo nhóm giúp dễ kiểm tra, không sót giấy tờ và bổ sung nhanh nếu app yêu cầu.</p>
+        <h2>Chủ&nbsp;quán cần chuẩn&nbsp;bị gì trước khi đăng&nbsp;ký?</h2>
+        <p class="lead">Trước khi gửi hồ sơ, bạn nên gom thông tin theo 5 nhóm dưới đây để dễ kiểm tra và bổ sung khi app yêu cầu.</p>
       </div>
-        <div class="split-media reveal reveal-d1"><img src="/assets/img/ho-so-theo-nhom.webp" srcset="/assets/img/ho-so-theo-nhom-800.webp 800w, /assets/img/ho-so-theo-nhom.webp 1400w" sizes="(max-width: 900px) 92vw, 540px" alt="Bìa hồ sơ, giấy tờ, thẻ và điện thoại được xếp gọn theo nhóm trên bàn gỗ" width="1400" height="939" loading="lazy"></div>
+        <div class="split-media reveal reveal-d1"><img src="/assets/img/giay-to-theo-nhom.webp" srcset="/assets/img/giay-to-theo-nhom-800.webp 800w, /assets/img/giay-to-theo-nhom.webp 1400w" sizes="(max-width: 900px) 92vw, 540px" alt="Bìa hồ sơ, giấy tờ, thẻ và điện thoại được xếp gọn theo nhóm trên bàn gỗ" width="1400" height="770" loading="lazy"></div>
       </div>
       <div class="checklist-grid">
         <article class="value-item reveal">
@@ -220,11 +222,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p>Ảnh mặt tiền rõ bảng hiệu và địa chỉ, ảnh món rõ nét, cùng tài khoản ngân hàng nhận tiền theo yêu cầu của app đã chọn.</p>
         </article>
       </div>
-      <p class="guide-note">Mỗi nền tảng có thể yêu cầu khác nhau theo thời điểm và khu vực. Vì vậy, chủ quán nên chuẩn bị thông tin theo nhóm trước, sau đó kiểm tra lại yêu cầu cụ thể khi gửi đăng ký qua kênh chính thức.</p>
+      <p class="guide-note">Yêu cầu của từng app có thể đổi theo thời điểm và khu vực, nên hãy kiểm tra lại khi gửi đăng ký.</p>
       <div class="guide-box reveal">
-        <h3>Giấy&nbsp;tờ thường khác nhau theo cách bạn đứng tên</h3>
-        <p>Cùng một quán, đứng tên cá nhân, hộ kinh doanh hay công ty sẽ cần bộ giấy tờ khác nhau. Bảng dưới là các mục hay gặp để bạn hình dung trước; danh sách chính xác còn tùy app và thời điểm đăng ký.</p>
-        <div class="type-grid">
+        <h3>Giấy&nbsp;tờ có thể khác nhau theo cách đứng&nbsp;tên</h3>
+        <p>Đứng tên cá nhân, hộ kinh doanh hay công ty thường cần giấy tờ khác nhau. Ba nhóm dưới đây để bạn đối chiếu trước — danh sách cần nộp vẫn theo hướng dẫn hiện hành của app.</p>
+        <div class="type-grid" data-tabs>
           <div><h4>Cá nhân</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD hoặc hộ chiếu còn hiệu lực</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Mã số thuế cá nhân</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền thấy rõ biển hiệu, địa chỉ</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Menu kèm giá và ảnh món</li></ul></div>
           <div><h4>Hộ&nbsp;kinh&nbsp;doanh</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD của chủ hộ</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy chứng nhận đăng ký hộ kinh doanh</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền thấy rõ biển hiệu, địa chỉ</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Menu kèm giá và ảnh món</li></ul></div>
           <div><h4>Công ty</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy chứng nhận đăng ký doanh nghiệp</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>CCCD người đại diện, giấy ủy quyền nếu người khác ký</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giấy tờ về an toàn thực phẩm nếu app yêu cầu</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Ảnh mặt tiền, menu kèm giá và ảnh món</li></ul></div>
@@ -246,20 +248,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="guide-timeline-num" aria-hidden="true">1</span>
           <div>
             <h3>Xác định mô hình quán và khu vực bán</h3>
-            <p>Xem quán bạn phù hợp bán mang đi, bán tại chỗ hay cả hai, và khu vực giao hàng chính.</p>
+            <p>Quán bán mang đi, bán tại chỗ hay cả hai, và giao chủ yếu ở khu vực nào.</p>
           </div>
         </div>
         <div class="guide-timeline-item">
           <span class="guide-timeline-num" aria-hidden="true">2</span>
           <div>
             <h3>Chọn nền&nbsp;tảng phù hợp để bắt đầu</h3>
-            <p>Ưu tiên nền tảng có tệp khách gần với quán trước, sau đó cân nhắc mở rộng thêm.</p>
+            <p>Ưu tiên app có nhiều khách quanh quán, sau đó mới mở thêm app khác.</p>
           </div>
         </div>
         <div class="guide-timeline-item">
           <span class="guide-timeline-num" aria-hidden="true">3</span>
           <div>
-            <h3>Chuẩn bị hồ&nbsp;sơ, menu, ảnh và thông&nbsp;tin thanh toán</h3>
+            <h3>Chuẩn&nbsp;bị hồ&nbsp;sơ, menu, ảnh và thông&nbsp;tin thanh toán</h3>
             <p>Gom đủ giấy tờ, ảnh chụp rõ nét và tài khoản nhận tiền theo danh mục ở trên.</p>
           </div>
         </div>
@@ -267,18 +269,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="guide-timeline-num" aria-hidden="true">4</span>
           <div>
             <h3>Gửi đăng&nbsp;ký qua kênh&nbsp;chính&nbsp;thức của nền&nbsp;tảng</h3>
-            <p>Nộp đúng biểu mẫu và mục đăng ký gian hàng do nền tảng cung cấp.</p>
+            <p>Điền đúng mục đăng ký gian hàng do app cung cấp.</p>
           </div>
         </div>
         <div class="guide-timeline-item">
           <span class="guide-timeline-num" aria-hidden="true">5</span>
           <div>
             <h3>Theo dõi phản hồi và bổ sung thông&nbsp;tin nếu được yêu cầu</h3>
-            <p>Kiểm tra email, tin nhắn hoặc ứng dụng để cập nhật kịp thời khi có yêu cầu thêm.</p>
+            <p>Theo dõi email, tin nhắn hoặc ứng dụng để bổ sung kịp khi app yêu cầu.</p>
           </div>
         </div>
       </div>
-      <p class="guide-note">Thời gian phản hồi và kết quả xét duyệt do từng nền tảng quyết định. Dịch vụ tư vấn chỉ hỗ trợ bạn chuẩn bị thông tin rõ ràng hơn trước khi gửi.</p>
+      <p class="guide-note">Thời gian phản hồi và kết quả xét duyệt do từng app quyết định. Tôi chỉ giúp bạn chuẩn bị thông tin rõ ràng trước khi gửi.</p>
       <div class="guide-box reveal" id="kenh-chinh-thuc">
         <h3>Gửi hồ&nbsp;sơ ở đâu cho an toàn?</h3>
         <ul class="channel-list">
@@ -297,7 +299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="section-head reveal">
         <span class="eyebrow">Minh bạch chi phí</span>
         <h2>Phí tư&nbsp;vấn và phí nền&nbsp;tảng khác nhau thế nào?</h2>
-        <p class="lead">Có hai khoản cần phân biệt: phí tư vấn và phí do nền tảng quy định.</p>
+        <p class="lead">Đây là hai khoản khác nhau: phí tư vấn trả cho tôi, và phí do app quy định.</p>
       </div>
       <div class="fee-grid">
         <article class="value-item reveal">
@@ -305,17 +307,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.4 3.4h11.2v17.2l-2.8-1.8-2.8 1.8-2.8-1.8-2.8 1.8z" fill="currentColor" opacity=".14" stroke="none"/><path d="M6.4 3.4h11.2v17.2l-2.8-1.8-2.8 1.8-2.8-1.8-2.8 1.8z"/><path d="M9.2 8h5.6"/><path d="M9.2 11.4h5.6"/></svg>
           </span>
           <h3>Phí tư&nbsp;vấn</h3>
-          <p>Là khoản chi cho phần hỗ trợ chuẩn bị hồ sơ, menu, thông tin quán và định hướng quy trình.</p>
+          <p>Khoản bạn trả cho phần hỗ trợ hồ sơ, menu, thông tin quán và hướng dẫn quy trình.</p>
         </article>
         <article class="value-item reveal reveal-d1">
           <span class="icon-tile">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="5.6" width="18.8" height="12.8" rx="2.8" fill="currentColor" opacity=".14" stroke="none"/><rect x="2.6" y="5.6" width="18.8" height="12.8" rx="2.8"/><path d="M2.6 9.6h18.8"/><path d="M6 14.4h3.2"/></svg>
           </span>
           <h3>Phí nền&nbsp;tảng</h3>
-          <p>Là phí, chiết khấu hoặc điều kiện vận hành do từng app tự quy định khi gian hàng hoạt động.</p>
+          <p>Phí, chiết khấu hoặc điều kiện vận hành do từng app quy định khi gian hàng hoạt động.</p>
         </article>
       </div>
-      <p class="guide-note">App Food Việt Nam không thu hộ phí nền tảng và không quyết định mức phí, chính sách hay kết quả duyệt của bất kỳ nền tảng nào.</p>
+      <p class="guide-note">Tôi không thu hộ phí của app và không quyết định mức phí, chính sách hay kết quả duyệt của app nào.</p>
       <p class="guide-note" style="margin-top: 10px;">Xem thêm chi tiết tại <a href="/bao-gia/">trang chi phí</a> và <a href="/chinh-sach/">trang chính sách</a>.</p>
     </div>
   </section>
@@ -339,7 +341,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Giấy tờ hết hạn hoặc không đúng loại app yêu cầu.</li>
           <li>Tài khoản nhận tiền chưa chuẩn bị sẵn.</li>
         </ul>
-        <p>Các lỗi trên chỉ là nhóm tình huống thường gặp khi chuẩn bị thông tin. Quyết định yêu cầu bổ sung hoặc từ chối hồ sơ vẫn thuộc về từng nền tảng.</p>
+        <p>Đây là các tình huống hay gặp; yêu cầu bổ sung hay từ chối hồ sơ vẫn do từng app quyết định.</p>
       </div>
         </div>
       </div>
@@ -351,11 +353,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Cần hiểu rõ giới hạn</span>
-        <h2>Có chắc chắn được duyệt sau khi chuẩn bị hồ&nbsp;sơ không?</h2>
+        <h2>Có chắc chắn được duyệt sau khi chuẩn&nbsp;bị hồ&nbsp;sơ không?</h2>
       </div>
       <div class="prose reveal">
-        <p>Không. Việc duyệt gian hàng do từng nền tảng tự xét theo chính sách riêng. Chuẩn bị hồ sơ kỹ giúp chủ quán giảm thiếu sót khi gửi thông tin, nhưng không đồng nghĩa với việc chắc chắn được duyệt, có đơn hàng hoặc có doanh thu.</p>
-        <p>Muốn biết hồ sơ quán mình còn thiếu gì, cách nhanh nhất là gọi hoặc nhắn Zalo để được xem đúng trường hợp.</p>
+        <p>Không. Mỗi app tự xét duyệt theo chính sách riêng. Hồ sơ kỹ giúp giảm thiếu sót, nhưng không bảo đảm được duyệt, có đơn hay có doanh thu.</p>
+        <p>Muốn biết hồ sơ quán mình còn thiếu gì? Bạn có thể gọi hoặc nhắn Zalo để tôi cùng kiểm tra.</p>
       </div>
     </div>
   </section>
@@ -366,11 +368,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="section-head reveal">
         <span class="eyebrow">Bắt đầu từ đâu</span>
         <h2>Khi nào nên nhờ tư&nbsp;vấn?</h2>
-        <p class="lead">Bạn chưa biết chọn app nào hoặc muốn kiểm tra hồ sơ trước khi gửi? Hãy trao đổi với người tư vấn về phần quán đang cần hỗ trợ.</p>
-        <p class="lead">Cuộc trao đổi đầu tiên không ràng buộc gì; bạn chỉ quyết định hợp tác sau khi đã hiểu rõ phạm vi công việc và chi phí.</p>
+        <p class="lead">Chưa biết chọn app nào, hoặc muốn có người xem lại hồ sơ trước khi gửi? Bạn chỉ quyết định làm sau khi đã rõ phạm vi việc và chi phí.</p>
       </div>
       <div class="cta-banner reveal">
-        <h2>Cần hỗ trợ chuẩn bị hồ&nbsp;sơ cho quán?</h2>
+        <h2>Cần hỗ trợ chuẩn&nbsp;bị hồ&nbsp;sơ cho quán?</h2>
         <p>Để lại thông tin, tôi gọi lại tư vấn — bạn quyết định sau khi đã rõ.</p>
         <a class="btn btn-primary btn-lg" href="/dang-ky/">
           Đăng ký tư vấn
@@ -386,7 +387,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="prose guide-disclaimer reveal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6l7.4 2.9v5.1c0 4.5-3 8.6-7.4 10.8C7.6 19.2 4.6 15.1 4.6 10.6V5.5z"/><path d="M8.8 11.8l2.3 2.3 4.3-4.6"/></svg>
-        <p>App Food Việt Nam là dịch vụ tư vấn độc lập. Website không phải kênh chính thức, không phải đại lý, không phải đối tác và không đại diện cho bất kỳ nền tảng giao đồ ăn nào. Việc xét duyệt, yêu cầu bổ sung hồ sơ, chiết khấu, phí vận hành và trạng thái gian hàng do từng nền tảng tự quy định.</p>
+        <p>App Food Việt Nam là dịch vụ tư vấn độc lập, không phải kênh chính thức, đại lý hay đối tác của nền tảng giao đồ ăn nào. Việc xét duyệt, phí và trạng thái gian hàng do từng nền tảng quy định. Nội dung rà soát lần cuối: 11/2026.</p>
       </div>
     </div>
   </section>
@@ -425,7 +426,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </nav>
     <div class="footer-col">
-      <h3>Liên hệ</h3>
+      <h3>Liên&nbsp;hệ</h3>
       <ul>
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.4 16.8v2.2a1.9 1.9 0 0 1-2.1 1.9 18.9 18.9 0 0 1-8.2-2.9 18.6 18.6 0 0 1-5.7-5.7A18.9 18.9 0 0 1 2.5 4a1.9 1.9 0 0 1 1.9-2.1h2.2a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.7.6 2.5a1.9 1.9 0 0 1-.4 2l-1 1a15.2 15.2 0 0 0 5.7 5.7l1-1a1.9 1.9 0 0 1 2-.4c.8.3 1.6.5 2.5.6a1.9 1.9 0 0 1 1.6 1.9z"/></svg>
@@ -472,6 +473,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </div>
 
-<script src="/assets/js/main.js?v=03b" defer></script>
+<script src="/assets/js/main.js?v=04b" defer></script>
 </body>
 </html>
