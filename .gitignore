@@ -26,3 +26,8 @@ assets/img/chu-quan.jpg
 node_modules/
 *.log
 .vscode/
+
+# Thư mục làm việc nội bộ (báo cáo audit, dữ liệu Ads thô) — tuyệt đối không deploy
+reports/
+GOOGLE-ADS-MCP/
+ads-workspace/

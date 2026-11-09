@@ -10,7 +10,12 @@ ErrorDocument 404 /404.html
 
 # Thư mục làm việc không thuộc deploy chuẩn — trả 404 (không tiết lộ path có
 # tồn tại hay không) phòng trường hợp file bị upload nhầm lên web root.
-RedirectMatch 404 ^/(\.claude|apps-script|audit-screenshots|dist)(/|$)
+RedirectMatch 404 ^/(\.claude|apps-script|audit-screenshots|dist|reports|GOOGLE-ADS-MCP|ads-workspace)(/|$)
+
+# Site tĩnh không phục vụ file dữ liệu/tài liệu nội bộ (.json/.md, kể cả README).
+<FilesMatch "\.(json|md)$">
+  Require all denied
+</FilesMatch>
 
 # Chặn file tài liệu cục bộ đích danh (không dùng wildcard *.md — README.md
 # vẫn public).
@@ -31,6 +36,12 @@ RedirectMatch 404 ^/(\.claude|apps-script|audit-screenshots|dist)(/|$)
 # bộ ngay sau deploy; css/js giữ max-age dài mặc định của host vì đã có
 # version query lo việc cập nhật.
 <IfModule mod_headers.c>
+  # Header bảo mật cơ bản. CSP đầy đủ chưa bật vì GTM nạp script động.
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Strict-Transport-Security "max-age=31536000"
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>

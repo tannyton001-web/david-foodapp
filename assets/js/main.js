@@ -84,7 +84,7 @@
        đóng sạch — gỡ inert, trả hidden — tránh kẹt overlay/nền chết click.
        addListener: fallback cho iPadOS ≤13 (chưa có addEventListener trên
        MediaQueryList) — đúng nhóm máy hay xoay ngang nhất. */
-    var mqMobile = window.matchMedia("(max-width: 900px)");
+    var mqMobile = window.matchMedia("(max-width: 1024px)");
     var dongKhiRoiBreakpoint = function (e) { if (!e.matches) dongMenu(); };
     if (mqMobile.addEventListener) mqMobile.addEventListener("change", dongKhiRoiBreakpoint);
     else if (mqMobile.addListener) mqMobile.addListener(dongKhiRoiBreakpoint);
@@ -193,7 +193,7 @@
     var v = inputs[name].value.trim();
     if (name === "so_dien_thoai") {
       if (!v) return "Nhập số điện thoại.";
-      if (!phoneHopLe(v)) return "SĐT gồm 10 số, bắt đầu bằng 0.";
+      if (!phoneHopLe(v)) return "Số điện thoại gồm 10 số, bắt đầu bằng 0.";
       return null;
     }
     if (!v) {
@@ -386,7 +386,7 @@
           /* Soft success: không dataLayer, không conversion, không redirect, không xóa form */
           setDangGui(false);
           btnText.textContent = btnTextGoc;
-          hienStatus("info", "SĐT này đã được đăng ký trước đó. Chúng tôi sẽ liên hệ bạn qua số này — không cần gửi lại.");
+          hienStatus("info", "Số điện thoại này đã gửi thông tin trước đó. Chúng tôi sẽ gọi lại theo số này, bạn không cần gửi thêm.");
         } else {
           guiLoi();
         }
@@ -401,7 +401,7 @@
   function guiLoi() {
     setDangGui(false);
     btnText.textContent = "Gửi lại";
-    hienStatus("error", "Chưa gửi được. Thông tin vẫn giữ, bấm Gửi lại.");
+    hienStatus("error", "Chưa gửi được. Thông tin bạn nhập vẫn còn, bấm Gửi lại nhé.");
   }
 
   /* Success duy nhất: push dataLayer (chỉ keys + page_path + form_location, cấm PII)
