@@ -36,7 +36,7 @@
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-700-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=04b">
+  <link rel="stylesheet" href="/assets/css/style.css?v=04c">
   <!-- Trang này KHÔNG chứa code conversion (Google Ads/GTM) và không push lead_form_submit_success.
        Refresh/back/truy cập trực tiếp không được phép fire lại conversion — event chỉ push 1 lần
        ở trang form, trước khi redirect sang đây. -->
@@ -129,7 +129,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </div>
 
-<script src="/assets/js/main.js?v=04b" defer></script>
+<script src="/assets/js/main.js?v=04c" defer></script>
 <script>
   /* Hiện lại các app đã chọn từ query ?apps=grabfood,shopeefood — chỉ nhận đúng 4 key hợp lệ */
   (function () {
@@ -137,7 +137,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var dots = { grabfood: "dot-grab", shopeefood: "dot-shopee", befood: "dot-be", xanhsm: "dot-xanh" };
     var raw = new URLSearchParams(window.location.search).get("apps") || "";
     var keys = raw.split(",").filter(function (k) { return names[k]; });
-    if (!keys.length) return;
+    if (!keys.length) {
+      if (!document.referrer || document.referrer.indexOf(window.location.hostname) === -1) {
+        var h1 = document.querySelector(".thanks-card h1");
+        var lead = document.querySelector(".thanks-card .lead");
+        if (h1) h1.textContent = "Bạn muốn đăng ký gian hàng trên app?";
+        if (lead) lead.innerHTML = 'Nếu bạn chưa gửi biểu mẫu, hãy <a href="/dang-ky/" style="text-decoration:underline;font-weight:700;">để lại thông tin quán tại trang đăng ký</a> hoặc gọi trực tiếp số bên dưới. Nếu bạn vừa gửi xong, tôi sẽ liên hệ trong giờ làm việc (Thứ 2 – Thứ 6, 8:00–18:00).';
+      }
+      return;
+    }
     var wrap = document.getElementById("thanks-apps");
     keys.forEach(function (k) {
       var chip = document.createElement("span");

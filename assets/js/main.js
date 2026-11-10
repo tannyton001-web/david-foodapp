@@ -5,6 +5,9 @@
   "use strict";
 
   window.__afvReady = true; /* head có hẹn giờ gỡ class js nếu file này không chạy */
+  /* main.js tải muộn hơn 3s (4G chậm): ẩn lại thông báo "mạng chậm" head đã bật, vì form đã chạy được */
+  var jsFailFallback = document.getElementById("js-fail-fallback");
+  if (jsFailFallback) jsFailFallback.hidden = true;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ----- Header: đổi nền khi cuộn ----- */
@@ -208,7 +211,14 @@
   var preselect = new URLSearchParams(window.location.search).get("app");
   if (preselect) {
     var box = form.querySelector('input[name="apps"][data-key="' + preselect.replace(/[^a-z]/g, "") + '"]');
-    if (box) box.checked = true;
+    if (box) {
+      box.checked = true;
+      /* /dang-ky/?app=<key> từ quảng cáo: eyebrow hiện đúng tên app (chỉ trang có #reg-eyebrow) */
+      var regEyebrow = document.getElementById("reg-eyebrow");
+      var appNames = { grabfood: "GrabFood", shopeefood: "ShopeeFood", befood: "BeFood", xanhsm: "Xanh SM Ngon" };
+      var appKey = box.getAttribute("data-key");
+      if (regEyebrow && appNames[appKey]) regEyebrow.textContent = "Mở gian hàng " + appNames[appKey] + " · Dành cho chủ quán";
+    }
   }
 
   /* Phone strict — khớp endpoint: chỉ trim đầu/cuối, không normalize +84,
@@ -394,6 +404,7 @@
       ten_chu_quan: inputs.ten_chu_quan.value.trim(),
       dia_chi_quan: inputs.dia_chi_quan.value.trim(),
       apps: appLabels,
+      form_location: FORM_LOCATION,
       page_url: window.location.href,
       website: (form.querySelector('input[name="website"]') || { value: "" }).value
     };
