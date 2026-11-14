@@ -6,6 +6,7 @@ __MACOSX/
 # Cấu hình editor/tool cục bộ — không deploy
 .claude/
 CLAUDE.md
+GEMINI.md
 
 # Backend form nằm ngoài scope repo web tĩnh này
 apps-script/

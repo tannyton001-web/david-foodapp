@@ -36,10 +36,13 @@
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/be-vietnam-pro-700-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=04c">
+  <link rel="stylesheet" href="/assets/css/style.css?v=04d">
   <style>
     /* Registration page only: preserve shared styles and image/icon sizing. */
     .registration-page .page-hero { padding-bottom: 28px; }
+    .registration-page .hero-enter, .registration-page .hero-enter-2,
+    .registration-page .hero-enter-3, .registration-page .hero-enter-4 { animation: none; }
+    .js .registration-page .reveal { opacity: 1; transform: none; transition: none; }
     .registration-page #label-apps .field-hint {
       display: block; margin-top: 4px; font-weight: 400;
     }
@@ -102,7 +105,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <span class="eyebrow hero-enter" id="reg-eyebrow">Dành cho chủ quán ăn · nhà hàng</span>
       <h1 class="hero-enter-2">Hỗ trợ <span class="grad-text">đăng&nbsp;ký bán&nbsp;hàng trên app</span></h1>
-      <p class="lead hero-enter-3">Chọn nền tảng muốn mở gian hàng (GrabFood, ShopeeFood, BeFood, Xanh&nbsp;SM&nbsp;Ngon) và để lại thông tin quán. Tôi gọi lại tư vấn hồ sơ đăng ký và báo chi phí trước khi làm.</p>
+      <p class="lead hero-enter-3" id="reg-lead"><span id="reg-lead-app">Chọn nền tảng muốn mở gian hàng (GrabFood, ShopeeFood, BeFood, Xanh&nbsp;SM&nbsp;Ngon)</span> và để lại thông tin quán. Tôi gọi lại tư vấn hồ sơ đăng ký và báo chi phí trước khi làm.</p>
       <span class="hero-badge hero-enter-3">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M8.4 12.4l2.4 2.4 4.8-5"/></svg>
         Chưa cần gửi giấy tờ
@@ -233,7 +236,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8" fill="currentColor" opacity=".14" stroke="none"/><circle cx="12" cy="12" r="8.8"/><path d="M8.4 12.4l2.4 2.4 4.8-5"/></svg>
           </span>
           <h3>Sau khi gửi thông&nbsp;tin quán</h3>
-          <p>Tôi sẽ gọi lại tư vấn quy trình và báo rõ chi phí để bạn cân nhắc trước khi quyết định.</p>
+          <p>Tôi gọi lại trong 24 giờ làm việc để tư vấn quy trình và báo rõ chi phí trước khi làm.</p>
         </article>
         <article class="value-item reveal reveal-d1">
           <span class="icon-tile">
@@ -249,6 +252,69 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <h3>Ai xét&nbsp;duyệt hồ&nbsp;sơ của quán?</h3>
           <p>Từng nền tảng (GrabFood, ShopeeFood, BeFood, Xanh&nbsp;SM) tự xét duyệt hồ sơ đối tác quán ăn. Tôi hướng dẫn gửi đăng ký qua kênh chính thức, không cam kết kết quả duyệt, số đơn hay doanh thu. <a href="/cau-hoi-thuong-gap/">Xem hỏi đáp</a>.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HỖ TRỢ THEO TỪNG NỀN TẢNG & HỒ SƠ CẦN CHUẨN BỊ ============ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Theo từng nền tảng</span>
+        <h2>Tôi hỗ&nbsp;trợ gì cho từng app?</h2>
+        <p class="lead">Tùy mô hình quán và khu vực bán, tôi hướng dẫn chuẩn bị danh mục giấy tờ, góp ý thực đơn và các bước tự gửi đăng ký trên kênh chính thức của từng ứng dụng.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card reveal">
+          <span class="glow" style="background:#00B14F" aria-hidden="true"></span>
+          <div class="service-head"><span class="app-dot dot-grab" aria-hidden="true"></span><h3>Đăng&nbsp;ký gian&nbsp;hàng GrabFood</h3></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Danh mục giấy tờ theo yêu cầu hiện hành của nền tảng</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Hướng dẫn thao tác gửi đăng ký trên kênh chính thức</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Góp ý menu, ảnh món và giá bán trước khi gửi</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal reveal-d1">
+          <span class="glow" style="background:#EE4D2D" aria-hidden="true"></span>
+          <div class="service-head"><span class="app-dot dot-shopee" aria-hidden="true"></span><h3>Đăng&nbsp;ký gian&nbsp;hàng ShopeeFood</h3></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Danh mục hồ sơ và cách theo dõi yêu cầu xác minh từ app</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Tính toán giá món cân đối theo mức chiết khấu</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Giải thích cách khuyến mãi của app tác động đến giá bán</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal reveal-d1">
+          <span class="glow" style="background:#F5B500" aria-hidden="true"></span>
+          <div class="service-head"><span class="app-dot dot-be" aria-hidden="true"></span><h3>Đăng&nbsp;ký gian&nbsp;hàng BeFood</h3></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Hướng dẫn chi tiết cho quán lần đầu mở bán trên app</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Chuẩn bị thực đơn chuẩn để dễ dùng cho nhiều app</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Hướng dẫn thao tác nhận đơn khi mới mở</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal reveal-d2">
+          <span class="glow" style="background:#00A98F" aria-hidden="true"></span>
+          <div class="service-head"><span class="app-dot dot-xanh" aria-hidden="true"></span><h3>Đăng&nbsp;ký gian&nbsp;hàng Xanh SM</h3></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Danh mục hồ sơ mở quán Xanh&nbsp;SM&nbsp;Ngon theo yêu cầu hiện hành</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Hoàn thiện thông tin quán, đồng bộ menu với các app đang bán</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.8 4.8L19.4 7"/></svg>Hướng dẫn cách theo dõi phản hồi từ nền tảng sau khi gửi</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="prose reveal" style="margin-top: clamp(24px, 3.5vw, 36px);">
+        <h2>Hồ&nbsp;sơ chủ&nbsp;quán thường chuẩn&nbsp;bị khi đăng&nbsp;ký</h2>
+        <ul>
+          <li><strong>Giấy tờ tùy thân:</strong> thẻ căn cước (CCCD) hoặc hộ chiếu còn hiệu lực của chủ quán hoặc người đứng tên hồ sơ.</li>
+          <li><strong>Giấy tờ kinh doanh (nếu nền tảng yêu cầu):</strong> giấy chứng nhận đăng ký hộ kinh doanh, doanh nghiệp hoặc giấy tờ về an toàn thực phẩm tùy mô hình quán.</li>
+          <li><strong>Thông tin quán, menu và hình ảnh:</strong> tên quán, địa chỉ hoạt động, danh sách món ăn kèm giá bán, ảnh chụp rõ biển hiệu mặt tiền và ảnh món ăn.</li>
+          <li><strong>Tài khoản ngân hàng nhận tiền:</strong> thông tin tài khoản chính chủ để nhận doanh thu theo quy định của ứng dụng đã chọn.</li>
+        </ul>
+        <p>Ở bước điền biểu mẫu phía trên, bạn chưa cần tải giấy tờ lên ngay. Xem chi tiết tại <a href="/huong-dan-dang-ky/">hướng dẫn chuẩn bị hồ sơ</a> và <a href="/bao-gia/">cách tính chi phí tư vấn</a>.</p>
       </div>
     </div>
   </section>
@@ -334,6 +400,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </div>
 
-<script src="/assets/js/main.js?v=04c" defer></script>
+<script src="/assets/js/main.js?v=04d" defer></script>
 </body>
 </html>

@@ -213,11 +213,13 @@
     var box = form.querySelector('input[name="apps"][data-key="' + preselect.replace(/[^a-z]/g, "") + '"]');
     if (box) {
       box.checked = true;
-      /* /dang-ky/?app=<key> từ quảng cáo: eyebrow hiện đúng tên app (chỉ trang có #reg-eyebrow) */
+      /* /dang-ky/?app=<key> từ quảng cáo: eyebrow + đoạn mở đầu hiện đúng tên app (giữ câu báo phí trước) */
       var regEyebrow = document.getElementById("reg-eyebrow");
+      var regLeadApp = document.getElementById("reg-lead-app");
       var appNames = { grabfood: "GrabFood", shopeefood: "ShopeeFood", befood: "BeFood", xanhsm: "Xanh SM Ngon" };
       var appKey = box.getAttribute("data-key");
       if (regEyebrow && appNames[appKey]) regEyebrow.textContent = "Mở gian hàng " + appNames[appKey] + " · Dành cho chủ quán";
+      if (regLeadApp && appNames[appKey]) regLeadApp.textContent = "Đăng ký mở gian hàng " + appNames[appKey] + " (hoặc chọn thêm ứng dụng khác bên dưới)";
     }
   }
 
