@@ -1,0 +1,25 @@
+# App Food Việt Nam
+
+> Dịch vụ tư vấn độc lập hướng dẫn chủ quán ăn, quán nước chuẩn bị hồ sơ, thực đơn và hình ảnh khi đăng ký gian hàng trên các ứng dụng giao đồ ăn tại Việt Nam (GrabFood, ShopeeFood, BeFood, Xanh SM Ngon). Dịch vụ không đại diện cho bất kỳ nền tảng nào; việc xét duyệt, biểu phí và trạng thái gian hàng do từng ứng dụng tự quyết định.
+
+## Ranh giới dịch vụ
+- Tư vấn chọn nền tảng phù hợp theo món bán, khu vực và công suất bếp.
+- Rà soát danh mục giấy tờ tùy thân, giấy tờ kinh doanh (nếu ứng dụng yêu cầu), thông tin quán và tài khoản ngân hàng nhận doanh thu.
+- Góp ý cách sắp xếp thực đơn, mô tả món, hình ảnh món ăn và tính toán giá bán phù hợp mức chiết khấu.
+- Hướng dẫn chủ quán tự gửi hồ sơ chính chủ qua kênh đăng ký chính thức của từng nền tảng.
+- Không đại diện nền tảng, không nộp thay, không thu hộ phí của ứng dụng và không cam kết kết quả xét duyệt.
+
+## Danh mục trang công khai
+- [Trang chủ](https://appfoodvietnam.com/): Tổng quan dịch vụ tư vấn độc lập mở gian hàng trên ứng dụng giao đồ ăn.
+- [Hướng dẫn đăng ký](https://appfoodvietnam.com/huong-dan-dang-ky/): Danh mục 5 nhóm hồ sơ cần chuẩn bị, quy trình 5 bước, phân biệt phí tư vấn với phí nền tảng và các lỗi thường gặp.
+- [Dịch vụ](https://appfoodvietnam.com/dich-vu/): Phạm vi hỗ trợ chi tiết theo từng ứng dụng và nguyên tắc minh bạch.
+- [Chi phí](https://appfoodvietnam.com/bao-gia/): Ba yếu tố xác định chi phí tư vấn, quy trình báo giá trước khi thực hiện và bảng tham khảo các hình thức triển khai.
+- [Câu hỏi thường gặp](https://appfoodvietnam.com/cau-hoi-thuong-gap/): Giải đáp 13 thắc mắc phổ biến về vai trò độc lập, giấy tờ, thời gian xét duyệt, chi phí và bảo mật dữ liệu.
+- [Giới thiệu](https://appfoodvietnam.com/gioi-thieu/): Thông tin về định hướng hoạt động và ba nguyên tắc làm việc của App Food Việt Nam.
+- [Liên hệ](https://appfoodvietnam.com/lien-he/): Các kênh liên hệ qua điện thoại, Zalo, email và biểu mẫu trực tuyến.
+- [Chính sách và điều khoản](https://appfoodvietnam.com/chinh-sach/): Quy định về phạm vi dịch vụ, giới hạn trách nhiệm, bảo mật thông tin và quyền sở hữu nhãn hiệu.
+
+## Thông tin liên hệ
+- Điện thoại và Zalo: 0936 254 103 (Thứ 2 đến Thứ 6, 8:00–18:00)
+- Email: admin@appfoodvietnam.com
+- Website: https://appfoodvietnam.com/
