@@ -120,3 +120,28 @@
   font-size: .875rem;
   margin-top: 14px;
 }
+
+/* Chống tràn ngang 320px khi .value-item chứa email hoặc chuỗi dài không khoảng trắng (/lien-he/) */
+.value-item > :not(.icon-tile) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* WCAG 1.4.1 (link-in-text-block): link trong đoạn văn cần gạch chân,
+   vì màu --man-dam so với chữ --muc-2 chỉ khoảng 1.05:1 */
+main :where(p, li, .faq-body) a:not(.btn):not(.app-link) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+main .form-aside .form-hotline a {
+  text-decoration: none;
+}
+
+/* Vùng chạm tối thiểu 44px cho link trong thẻ app (trang chủ) */
+.app-card .app-link {
+  min-height: 44px;
+}
+
+/* Tương phản WCAG AA: KHÔNG đặt chữ thường màu var(--muc-3) (#8A6B79) trực tiếp
+   trên nền var(--nen-2) (#FFF3E6) vì chỉ đạt 4.31:1 < 4.5:1; trên --nen-2 dùng var(--muc-2). */
