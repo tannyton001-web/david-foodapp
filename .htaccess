@@ -1,5 +1,21 @@
 ErrorDocument 404 /404.html
 
+# Chuẩn hóa URL 1 bước (301) về https://appfoodvietnam.com và bỏ hậu tố
+# /index.html khi truy cập trực tiếp. Không thêm "?" cuối đích, không dùng
+# cờ QSD: query string (?app=, gclid, gbraid, wbraid, utm_*) được giữ nguyên.
+# http -> https đã do edge Hostinger xử lý, nên ở đây không xét %{HTTPS}
+# (tránh vòng lặp sau reverse proxy).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # THE_REQUEST là dòng request gốc, nên không lặp với DirectoryIndex nội bộ.
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ https://appfoodvietnam.com/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^www\.appfoodvietnam\.com$ [NC]
+  RewriteRule ^ https://appfoodvietnam.com%{REQUEST_URI} [R=301,L]
+</IfModule>
+
 # Chặn mọi dotfile (.env, .gitignore, .htaccess, .DS_Store...) khỏi web root.
 # Match theo TÊN FILE (không theo path) nên KHÔNG ảnh hưởng thư mục
 # .well-known/ (vd /.well-known/security.txt có tên file "security.txt",
@@ -50,5 +66,10 @@ RedirectMatch 404 ^/(\.claude|apps-script|audit-screenshots|dist|reports|GOOGLE-
   # cache dài để tránh lỗi trộn bản cũ khi thay ảnh cùng tên.)
   <FilesMatch "\.woff2$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Khóa UTF-8 cho llms.txt và robots.txt: host trả text/plain không charset,
+  # cộng nosniff thì trình duyệt giải mã sai tiếng Việt.
+  <FilesMatch "^(llms|robots)\.txt$">
+    Header set Content-Type "text/plain; charset=utf-8"
   </FilesMatch>
 </IfModule>
