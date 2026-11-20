@@ -16,7 +16,7 @@
     header.classList.toggle("is-scrolled", window.scrollY > 24);
   }
   if (header) {
-    onScrollHeader();
+    requestAnimationFrame(onScrollHeader); /* đọc scrollY ở frame kế, tránh forced reflow lúc nạp */
     window.addEventListener("scroll", onScrollHeader, { passive: true });
   }
 
@@ -149,7 +149,7 @@
     var onScrollFab = function () {
       floating.classList.toggle("is-visible", window.scrollY >= showAt);
     };
-    onScrollFab();
+    requestAnimationFrame(onScrollFab);
     window.addEventListener("scroll", onScrollFab, { passive: true });
 
     /* Không che form hoặc footer: 1 trong 2 vào khung nhìn thì tạm ẩn nút nổi */
