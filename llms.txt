@@ -12,6 +12,10 @@
 ## Danh mục trang công khai
 - [Trang chủ](https://appfoodvietnam.com/): Tổng quan dịch vụ tư vấn độc lập mở gian hàng trên ứng dụng giao đồ ăn.
 - [Hướng dẫn đăng ký](https://appfoodvietnam.com/huong-dan-dang-ky/): Danh mục 5 nhóm hồ sơ cần chuẩn bị, quy trình 5 bước, phân biệt phí tư vấn với phí nền tảng và các lỗi thường gặp.
+- [Hồ sơ và cách đăng ký GrabFood](https://appfoodvietnam.com/huong-dan-dang-ky/grabfood/): Kênh đăng ký đối tác chính thức, quy trình 3 bước, danh mục giấy tờ tham khảo và những thông tin chủ quán cần rà soát trước khi gửi hồ sơ GrabFood.
+- [Hồ sơ và cách đăng ký ShopeeFood](https://appfoodvietnam.com/huong-dan-dang-ky/shopeefood/): Kênh đăng ký chính thức, danh mục giấy tờ theo 3 nhóm tư cách ký hợp đồng, quy trình 3 bước và các điểm cần kiểm tra trước khi gửi hồ sơ ShopeeFood.
+- [Hồ sơ và cách đăng ký BeFood](https://appfoodvietnam.com/huong-dan-dang-ky/befood/): Kênh đăng ký chính thức của nền tảng be, 5 nhóm giấy tờ cần chuẩn bị, quy trình 4 bước và lưu ý rà soát hồ sơ BeFood.
+- [Hồ sơ và cách đăng ký Xanh SM Ngon](https://appfoodvietnam.com/huong-dan-dang-ky/xanh-sm-ngon/): Kênh đăng ký đối tác chính thức của Xanh SM, danh mục giấy tờ cần chuẩn bị, quy trình 4 bước và lưu ý rà soát hồ sơ Xanh SM Ngon.
 - [Dịch vụ](https://appfoodvietnam.com/dich-vu/): Phạm vi hỗ trợ chi tiết theo từng ứng dụng và nguyên tắc minh bạch.
 - [Chi phí](https://appfoodvietnam.com/bao-gia/): Ba yếu tố xác định chi phí tư vấn, quy trình báo giá trước khi thực hiện và bảng tham khảo các hình thức triển khai.
 - [Câu hỏi thường gặp](https://appfoodvietnam.com/cau-hoi-thuong-gap/): Giải đáp 13 thắc mắc phổ biến về vai trò độc lập, giấy tờ, thời gian xét duyệt, chi phí và bảo mật dữ liệu.
